@@ -23,7 +23,7 @@ public class Reservation {
         voyageur = paramVoyageur;
         identifiant = paramIdentifiant;
         dateDeReservation = new Date();
-        estValidee = true;
+        estValidee = false;
     }
 
     /**

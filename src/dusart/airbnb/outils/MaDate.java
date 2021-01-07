@@ -15,7 +15,6 @@ public class MaDate extends Date {
      * @param jour date du jour (entre 1 et 31)
      * @param mois numéro du mois (entre 1 et 12)
      * @param annee année au format YYYY
-     * @return une instance de MaDate
      */
     public MaDate(int jour, int mois, int annee){
         super(annee - 1900, mois - 1, jour);

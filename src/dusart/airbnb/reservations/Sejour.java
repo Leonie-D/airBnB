@@ -30,10 +30,7 @@ public abstract class Sejour implements SejourInterface {
     @Override
     public boolean verficationDateArrivee() {
         Date today = new Date();
-        if(dateArrivee.compareTo(today) <= 0) {
-            return false;
-        }
-        return true;
+        return dateArrivee.compareTo(today) > 0;
     }
 
     @Override
@@ -41,10 +38,7 @@ public abstract class Sejour implements SejourInterface {
 
     @Override
     public boolean verificationNombreDeVoyageurs() {
-        if(nbVoyageurs <= 0 || nbVoyageurs > logement.getNbVoyageursMax()) {
-            return false;
-        }
-        return true;
+        return nbVoyageurs > 0 && nbVoyageurs <= logement.getNbVoyageursMax();
     }
 
     /**

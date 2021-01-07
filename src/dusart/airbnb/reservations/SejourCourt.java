@@ -23,10 +23,7 @@ public class SejourCourt extends Sejour implements ConditionsTarifairesInterace 
      */
     @Override
     public boolean verificationNombreDeNuits() {
-        if(nbNuits < 1 || nbNuits > 5) {
-            return false;
-        }
-        return true;
+        return nbNuits > 0 && nbNuits <= 5;
     }
 
     /**

@@ -13,7 +13,7 @@ public class Menu {
         scanner.close();
     }
 
-    private static void listerMenu() {
+    static void listerMenu() {
         System.out.println(
                 "-------------------------------------\n" +
                 "Saisir une option :\n" +
@@ -23,10 +23,25 @@ public class Menu {
                 "4 : Liste des réservations\n" +
                 "5 : Fermer le programme"
         );
-        System.out.println(choix(5));
+        switch (Menu.choix(5)) {
+            case 1:
+                GestionHotes.listerHotes();
+                break;
+            case 2:
+                System.out.println("Liste des logements");
+                break;
+            case 3:
+                System.out.println("Liste des voyageurs");
+                break;
+            case 4:
+                System.out.println("Liste des réservations");
+                break;
+            case 5:
+                break;
+        }
     }
 
-    private static int choix(int maxValue) {
+    static int choix(int maxValue) {
         int valueChoix;
         do {
             try {
@@ -41,7 +56,7 @@ public class Menu {
     }
 
     private static boolean verifierChoix(int valueChoix, int maxValue) {
-        if(valueChoix > 1 && valueChoix < maxValue) {
+        if(valueChoix > 0 && valueChoix <= maxValue) {
             return true;
         } else {
             System.out.println("Merci de saisir un nombre entre 1 et " + maxValue);

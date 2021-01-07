@@ -1,12 +1,19 @@
 package dusart.airbnb.menu;
 
+import dusart.airbnb.utilisateurs.Hote;
+
+import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Menu {
     static Scanner scanner;
+    static ArrayList<Hote> listeHotes;
 
     public static void main(String[] args) {
+        // initialisation des listes;
+        listeHotes = new ArrayList<Hote>();
+
         System.out.println("Bienvenue chez AirBnB");
         scanner = new Scanner(System.in);
         listerMenu();

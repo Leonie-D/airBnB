@@ -2,12 +2,14 @@ package dusart.airbnb.menu;
 
 import dusart.airbnb.utilisateurs.Hote;
 
-import java.util.EmptyStackException;
+import java.util.InputMismatchException;
 
 public class GestionHotes {
     static void listerHotes() {
         System.out.println("-------------------------------------");
         System.out.println("Liste des hôtes ");
+        afficherListeHotes();
+        System.out.println("-------------------------------------");
         System.out.println("Saisir une option : ");
         System.out.println("1 : Ajouter un hôte");
         System.out.println("2 : Supprimer un hôte");
@@ -16,17 +18,37 @@ public class GestionHotes {
             case 1:
                 try {
                     ajouterHote();
+                } catch(InputMismatchException e) {
+                    Menu.scanner.next();
+                    System.out.println("Un problème est survenu lors de la saisie");
                 } catch(Exception e) {
                     System.out.println(e.getMessage());
                 }
+                Menu.listerMenu();
                 break;
             case 2:
-                //supprimerHote();
+                try {
+                    supprimerHote();
+                } catch(InputMismatchException e) {
+                    Menu.scanner.next();
+                    System.out.println("Un problème est survenu lors de la saisie");
+                } catch(Exception e) {
+                    System.out.println(e.getMessage());
+                }
+                Menu.listerMenu();
                 break;
             case 3:
                 Menu.listerMenu();
                 break;
 
+        }
+    }
+
+    private static void afficherListeHotes() {
+        for (int i = 0; i < Menu.listeHotes.size(); i++) {
+            System.out.print((i + 1) + " : ");
+            Menu.listeHotes.get(i).afficher();
+            System.out.println();
         }
     }
 
@@ -62,6 +84,24 @@ public class GestionHotes {
         }
 
         Hote hote = new Hote(prenom, nom, age, delaiDeReponse);
+        System.out.println("Un nouvel hôte à bien été enregistré : ");
         hote.afficher();
+        System.out.println();
+        Menu.listeHotes.add(hote);
+    }
+
+    private static void supprimerHote() throws Exception {
+        System.out.println("-------------------------------------");
+        afficherListeHotes();
+        System.out.println("Merci d'indiquer le numéro de l'hôte à supprimer : ");
+        int indiceHote = Menu.scanner.nextInt() - 1;
+        if(indiceHote < 0 || indiceHote >= Menu.listeHotes.size()) {
+            throw new Exception("Aucun hôte à cet indice");
+        }
+
+        Menu.listeHotes.get(indiceHote).afficher();
+        System.out.println(" a bien été supprimé.");
+        Menu.listeHotes.remove(indiceHote);
+        afficherListeHotes();
     }
 }

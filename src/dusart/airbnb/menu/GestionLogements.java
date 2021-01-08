@@ -4,7 +4,6 @@ import dusart.airbnb.logements.Appartement;
 import dusart.airbnb.logements.Logement;
 import dusart.airbnb.logements.Maison;
 
-import java.sql.SQLOutput;
 import java.util.InputMismatchException;
 
 public class GestionLogements {
@@ -132,7 +131,17 @@ public class GestionLogements {
         Menu.listeLogements.add(logement);
     }
 
-    private static void supprimerLogement() {
+    private static void supprimerLogement() throws Exception {
+        System.out.println("-------------------------------------");
+        Menu.afficherListeLogements();
+        System.out.println("Merci d'indiquer le numéro du logement à supprimer : ");
+        int indiceLogement = Menu.scanner.nextInt() - 1;
+        if(indiceLogement < 0 || indiceLogement >= Menu.listeLogements.size()) {
+            throw new Exception("Aucun logement à cet indice");
+        }
 
+        Menu.listeLogements.remove(indiceLogement);
+        System.out.println("Le logement a bien été supprimé.");
+        Menu.afficherListeLogements();
     }
 }

@@ -118,7 +118,17 @@ public class GestionReservations {
         }
     }
 
-    private static void supprimerReservation() {
+    private static void supprimerReservation() throws Exception {
+        System.out.println("-------------------------------------");
+        Menu.afficherListeReservations();
+        System.out.println("Merci d'indiquer le numéro de la réservation à supprimer : ");
+        int indiceReservation = Menu.scanner.nextInt() - 1;
+        if(indiceReservation < 0 || indiceReservation >= Menu.listeReservations.size()) {
+            throw new Exception("Aucune réservation à cet indice");
+        }
 
+        Menu.listeReservations.remove(indiceReservation);
+        System.out.println("La réservation a bien été supprimée.");
+        Menu.afficherListeReservations();
     }
 }

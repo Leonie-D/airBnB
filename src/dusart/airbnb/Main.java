@@ -39,9 +39,11 @@ public class Main {
 
         System.out.println();
 
+        /*
         Reservation resa1 = new Reservation(weekend, camille, 1234);
         resa1.afficher();
         Reservation resa2 = new Reservation(vacances, camille, 4321);
         resa2.afficher();
+        */
     }
 }

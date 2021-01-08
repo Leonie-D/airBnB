@@ -6,10 +6,10 @@ import java.util.Date;
 
 public abstract class Sejour implements SejourInterface {
     private Date dateArrivee;
-    protected int nbNuits;
-    protected Logement logement;
+    private int nbNuits;
+    private Logement logement;
     private int nbVoyageurs;
-    protected double tarif;
+    private double tarif;
 
     /**
      * Le constructeur unique pour définir un séjour à partir de 4 paramètres
@@ -34,9 +34,6 @@ public abstract class Sejour implements SejourInterface {
     }
 
     @Override
-    public abstract boolean verificationNombreDeNuits();
-
-    @Override
     public boolean verificationNombreDeVoyageurs() {
         return nbVoyageurs > 0 && nbVoyageurs <= logement.getNbVoyageursMax();
     }
@@ -46,6 +43,34 @@ public abstract class Sejour implements SejourInterface {
      */
     public double getTarif() {
         return tarif;
+    }
+
+    /**
+     * Modifie la valeur du tarif
+     */
+    public void setTarif(double paramTarif) {
+        tarif = paramTarif;
+    }
+
+    /**
+     * @return le nombre de nuits
+     */
+    public int getNbNuits() {
+        return nbNuits;
+    }
+
+    /**
+     * @return le nombre de voyageurs
+     */
+    public int getNbVoyageurs() {
+        return nbVoyageurs;
+    }
+
+    /**
+     * @return le logement
+     */
+    public Logement getLogement() {
+        return logement;
     }
 
     @Override

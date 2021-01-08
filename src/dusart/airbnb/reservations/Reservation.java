@@ -17,13 +17,22 @@ public class Reservation {
      * @param paramSejour le séjour à réserver
      * @param paramVoyageur le voyageur qui effectue la réservation
      * @param paramIdentifiant l'identifiant unique de la réservation
+     * @throws Exception si le contrat du séjour n'est pas respecté
      */
-    public Reservation(Sejour paramSejour, Voyageur paramVoyageur, int paramIdentifiant) {
-        sejour = paramSejour;
-        voyageur = paramVoyageur;
-        identifiant = paramIdentifiant;
-        dateDeReservation = new Date();
-        estValidee = false;
+    public Reservation(Sejour paramSejour, Voyageur paramVoyageur, int paramIdentifiant) throws Exception {
+        if(!paramSejour.verficationDateArrivee()) {
+            throw new Exception("La date d'arrivée ne peut être antérieure à la date du jour");
+        } else if(!paramSejour.verificationNombreDeNuits()) {
+            throw new Exception("Le nombre de nuits doit être compris entre 1 et 31");
+        } else if(!paramSejour.verificationNombreDeVoyageurs()) {
+            throw new Exception("Le nombre de voyageurs ne peut excédé la capacité du logement (" + paramSejour.getLogement().getNbVoyageursMax() + ")");
+        } else {
+            sejour = paramSejour;
+            voyageur = paramVoyageur;
+            identifiant = paramIdentifiant;
+            dateDeReservation = new Date();
+            estValidee = false;
+        }
     }
 
     /**

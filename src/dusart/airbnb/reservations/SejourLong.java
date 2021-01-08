@@ -26,7 +26,7 @@ public class SejourLong extends Sejour implements ConditionsTarifairesInterace {
      */
     @Override
     public boolean verificationNombreDeNuits() {
-        return nbNuits >= 6 && nbNuits <= 31;
+        return getNbNuits() >= 6 && getNbNuits() <= 31;
     }
 
     /**
@@ -44,7 +44,7 @@ public class SejourLong extends Sejour implements ConditionsTarifairesInterace {
      */
     public void afficher() {
         super.afficher();
-        System.out.println("Le prix de ce séjour est de " + tarif + "€ (promotion de " + promotion + "€ déduite).");
+        System.out.println("Le prix de ce séjour est de " + getTarif() + "€ (promotion de " + promotion + "€ déduite).");
     }
 
     /**
@@ -53,8 +53,8 @@ public class SejourLong extends Sejour implements ConditionsTarifairesInterace {
      */
     @Override
     protected void miseAJourDuTarif() {
-        int tarifAvantPromotion = nbNuits * logement.getTarifParNuit();
+        int tarifAvantPromotion = getNbNuits() * getLogement().getTarifParNuit();
         promotion = tarifAvantPromotion * PROMOTION_EN_POURCENTAGE;
-        tarif = tarifAvantPromotion - promotion;
+        setTarif(tarifAvantPromotion - promotion);
     }
 }

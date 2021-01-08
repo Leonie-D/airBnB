@@ -23,7 +23,7 @@ public class SejourCourt extends Sejour implements ConditionsTarifairesInterace 
      */
     @Override
     public boolean verificationNombreDeNuits() {
-        return nbNuits > 0 && nbNuits <= 5;
+        return getNbNuits() > 0 && getNbNuits() <= 5;
     }
 
     /**
@@ -41,7 +41,7 @@ public class SejourCourt extends Sejour implements ConditionsTarifairesInterace 
      */
     public void afficher() {
         super.afficher();
-        System.out.println("Le prix de ce séjour est de " + tarif + "€.");
+        System.out.println("Le prix de ce séjour est de " + getTarif() + "€.");
     }
 
     /**
@@ -49,6 +49,6 @@ public class SejourCourt extends Sejour implements ConditionsTarifairesInterace 
      */
     @Override
     protected void miseAJourDuTarif() {
-        tarif = nbNuits * logement.getTarifParNuit();
+        setTarif(getNbNuits() * getLogement().getTarifParNuit());
     }
 }

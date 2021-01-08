@@ -5,10 +5,13 @@ import dusart.airbnb.utilisateurs.Hote;
 import java.util.InputMismatchException;
 
 public class GestionHotes {
+    /**
+     * Affiche la liste des hôtes et le sous-menu "hôte"
+     */
     static void listerHotes() {
         System.out.println("-------------------------------------");
         System.out.println("Liste des hôtes ");
-        afficherListeHotes();
+        Menu.afficherListeHotes();
         System.out.println("-------------------------------------");
         System.out.println("Saisir une option : ");
         System.out.println("1 : Ajouter un hôte");
@@ -24,7 +27,7 @@ public class GestionHotes {
                 } catch(Exception e) {
                     System.out.println(e.getMessage());
                 }
-                Menu.listerMenu();
+                listerHotes();
                 break;
             case 2:
                 try {
@@ -35,7 +38,7 @@ public class GestionHotes {
                 } catch(Exception e) {
                     System.out.println(e.getMessage());
                 }
-                Menu.listerMenu();
+                listerHotes();
                 break;
             case 3:
                 Menu.listerMenu();
@@ -44,14 +47,10 @@ public class GestionHotes {
         }
     }
 
-    private static void afficherListeHotes() {
-        for (int i = 0; i < Menu.listeHotes.size(); i++) {
-            System.out.print((i + 1) + " : ");
-            Menu.listeHotes.get(i).afficher();
-            System.out.println();
-        }
-    }
-
+    /**
+     * Demande la saisie des informations et crée l'hôte associé
+     * @throws Exception dans le cas ou le prénom contient des caractères autres que des lettres, ou si la longueur n'est pas valide
+     */
     private static void ajouterHote() throws Exception {
         System.out.print("Prénom de l'hôte : ");
         String prenom = Menu.scanner.next();
@@ -90,9 +89,13 @@ public class GestionHotes {
         Menu.listeHotes.add(hote);
     }
 
+    /**
+     * Demande et supprime l'hôte correspondant à l'indice saisi
+     * @throws Exception si l'indice ne correspond pas à un hôte existant ou si n'est pas un entier
+     */
     private static void supprimerHote() throws Exception {
         System.out.println("-------------------------------------");
-        afficherListeHotes();
+        Menu.afficherListeHotes();
         System.out.println("Merci d'indiquer le numéro de l'hôte à supprimer : ");
         int indiceHote = Menu.scanner.nextInt() - 1;
         if(indiceHote < 0 || indiceHote >= Menu.listeHotes.size()) {
@@ -102,6 +105,6 @@ public class GestionHotes {
         Menu.listeHotes.get(indiceHote).afficher();
         System.out.println(" a bien été supprimé.");
         Menu.listeHotes.remove(indiceHote);
-        afficherListeHotes();
+        Menu.afficherListeHotes();
     }
 }

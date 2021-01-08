@@ -6,6 +6,7 @@ import dusart.airbnb.reservations.Sejour;
 import dusart.airbnb.reservations.SejourCourt;
 import dusart.airbnb.reservations.SejourLong;
 
+import java.io.PrintWriter;
 import java.util.InputMismatchException;
 
 public class GestionReservations {
@@ -95,9 +96,22 @@ public class GestionReservations {
         }
 
         try {
-            Reservation reservation = new Reservation(sejour, Menu.listeVoyageurs.get(indiceVoyageur), Menu.listeReservations.size());
+            int reference = Menu.listeReservations.size();
+            Reservation reservation = new Reservation(sejour, Menu.listeVoyageurs.get(indiceVoyageur), reference);
             System.out.println("Une nouvelle réservation à bien été enregistrée.");
             Menu.listeReservations.add(reservation);
+
+            // création d'un fichier text pour la réservation
+            String nomFichier = "reservation-" + reference + ".txt";
+            String encoding = "UTF-8";
+            PrintWriter writer = new PrintWriter(nomFichier, encoding);
+            writer.println("Numéro du voyageur : " + (indiceVoyageur + 1)); // change si des voyageurs sont supprimés de la liste ;)
+            writer.println("Numéro du logement : " + (indiceLogement + 1));// change si des logements sont supprimés de la liste ;)
+            writer.println("Date d'arrivée (DD/MM/YYY) : " + dateArrivee.toString());
+            writer.println("Nombre de nuits : " + nbNuits);
+            writer.println("Nombre de personnes : " + nbVoyageurs);
+            writer.close();
+
             listerReservations();
         } catch (Exception e) {
             throw e;

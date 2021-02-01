@@ -55,6 +55,7 @@ public class LogementsHandler extends DefaultHandler {
                 for (int i = 0; i < listeHotes.size(); i++) {
                     if(listeHotes.get(i).equals(hote)) {
                         ajouter = false;
+                        hote = listeHotes.get(i);
                     }
                 }
                 if(ajouter) {

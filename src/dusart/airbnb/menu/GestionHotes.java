@@ -17,33 +17,25 @@ public class GestionHotes {
         System.out.println("1 : Ajouter un hôte");
         System.out.println("2 : Supprimer un hôte");
         System.out.println("3 : Retour");
-        switch (Menu.choix(3)) {
-            case 1:
-                try {
+        try {
+            switch (Menu.choix(3)) {
+                case 1:
                     ajouterHote();
-                } catch(InputMismatchException e) {
-                    Menu.scanner.next();
-                    System.out.println("Un problème est survenu lors de la saisie");
-                } catch(Exception e) {
-                    System.out.println(e.getMessage());
-                }
-                listerHotes();
-                break;
-            case 2:
-                try {
+                    break;
+                case 2:
                     supprimerHote();
-                } catch(InputMismatchException e) {
-                    Menu.scanner.next();
-                    System.out.println("Un problème est survenu lors de la saisie");
-                } catch(Exception e) {
-                    System.out.println(e.getMessage());
-                }
-                listerHotes();
-                break;
-            case 3:
-                Menu.listerMenu();
-                break;
-
+                    break;
+                case 3:
+                    Menu.listerMenu();
+                    break;
+            }
+        } catch(InputMismatchException e) {
+            Menu.scanner.next();
+            System.out.println("Un problème est survenu lors de la saisie");
+        } catch(Exception e) {
+            System.out.println(e.getMessage());
+        } finally {
+            listerHotes();
         }
     }
 

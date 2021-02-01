@@ -24,4 +24,14 @@ public class Personne {
     public void afficher() {
         System.out.print(prenom + " " + nom + " (" + age + " ans)");
     }
+
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) return true;
+        if (object == null || getClass() != object.getClass()) return false;
+        Personne personneComparee = (Personne) object;
+        return nom.equals(personneComparee.nom) &&
+                prenom.equals(personneComparee.prenom) &&
+                age == personneComparee.age;
+    }
 }

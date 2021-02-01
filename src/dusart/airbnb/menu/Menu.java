@@ -2,11 +2,15 @@ package dusart.airbnb.menu;
 
 import dusart.airbnb.logements.Appartement;
 import dusart.airbnb.logements.Logement;
+import dusart.airbnb.logements.LogementsHandler;
 import dusart.airbnb.logements.Maison;
 import dusart.airbnb.reservations.Reservation;
 import dusart.airbnb.utilisateurs.Hote;
 import dusart.airbnb.utilisateurs.Voyageur;
+import org.xml.sax.helpers.DefaultHandler;
 
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -25,7 +29,21 @@ public class Menu {
         listeVoyageurs = new ArrayList<Voyageur>();
         listeReservations = new ArrayList<Reservation>();
 
-        Hote leonie = new Hote("Léonie", "Dusart", 29, 24);
+        try {
+            SAXParserFactory factory = SAXParserFactory.newInstance();
+            SAXParser saxParser = factory.newSAXParser();
+            LogementsHandler logementsHandler = new LogementsHandler();
+
+            saxParser.parse("file:///Users/leonie/Downloads/logements.xml", logementsHandler);
+            listeLogements = logementsHandler.getListeLogements();
+            listeHotes = logementsHandler.getListeHotes();
+
+        } catch(Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+
+        /*Hote leonie = new Hote("Léonie", "Dusart", 29, 24);
         Hote edouard = new Hote("Edouard", "Coudert", 32, 1);
         Voyageur camille = new Voyageur("Camille", "Gérard", 28);
         Maison maison = new Maison(leonie, 55, "6 avenue Maginot, 37100 TOURS", 70, 2, 100, false);
@@ -35,7 +53,7 @@ public class Menu {
         listeHotes.add(edouard);
         listeVoyageurs.add(camille);
         listeLogements.add(maison);
-        listeLogements.add(appart);
+        listeLogements.add(appart);*/
 
         System.out.println("Bienvenue chez AirBnB");
         scanner = new Scanner(System.in);
@@ -80,7 +98,7 @@ public class Menu {
      * @param maxValue valeur maximale possible
      * @return la valeur du choix
      */
-    static int choix(int maxValue) {
+    static int choix(int maxValue) { // voir correction...
         int valueChoix;
         do {
             try {
@@ -88,7 +106,7 @@ public class Menu {
             } catch (InputMismatchException e) {
                 scanner.next();
                 System.out.println("Merci de saisir un entier");
-                valueChoix = choix(maxValue);
+                valueChoix = 0;
             }
         } while (!verifierChoix(valueChoix, maxValue));
         return valueChoix;

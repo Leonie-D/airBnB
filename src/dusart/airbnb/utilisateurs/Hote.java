@@ -28,4 +28,10 @@ public class Hote extends Personne {
             System.out.print(" qui s'engage à répondre dans les " + delaiDeReponse + " heures.");
         }
     }
+
+    @Override
+    public boolean equals(Object object) {
+        Hote hoteCompare = (Hote) object;
+        return super.equals(object) && delaiDeReponse == hoteCompare.delaiDeReponse;
+    }
 }

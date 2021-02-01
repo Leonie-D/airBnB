@@ -42,18 +42,10 @@ public class Menu {
             System.out.println(e.getMessage());
         }
 
+        ImportXML.importLogements("file:///Users/leonie/Downloads/logements.xml", listeLogements, listeHotes);
 
-        /*Hote leonie = new Hote("Léonie", "Dusart", 29, 24);
-        Hote edouard = new Hote("Edouard", "Coudert", 32, 1);
         Voyageur camille = new Voyageur("Camille", "Gérard", 28);
-        Maison maison = new Maison(leonie, 55, "6 avenue Maginot, 37100 TOURS", 70, 2, 100, false);
-        Appartement appart = new Appartement(edouard, 70, "8 avenue Maginot, 37100 TOURS", 90, 2, 3, 50);
-
-        listeHotes.add(leonie);
-        listeHotes.add(edouard);
         listeVoyageurs.add(camille);
-        listeLogements.add(maison);
-        listeLogements.add(appart);*/
 
         System.out.println("Bienvenue chez AirBnB");
         scanner = new Scanner(System.in);
@@ -89,6 +81,7 @@ public class Menu {
                 GestionReservations.listerReservations();
                 break;
             case 5:
+                System.exit(0);
                 break;
         }
     }

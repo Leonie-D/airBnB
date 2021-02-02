@@ -12,6 +12,7 @@ import dusart.airbnb.utilisateurs.Voyageur;
 
 import java.util.ArrayList;
 import java.util.InputMismatchException;
+import java.util.Optional;
 import java.util.Scanner;
 
 public class Menu {
@@ -59,10 +60,13 @@ public class Menu {
         }
 
         Maison logement2 = GestionLogements.findLogementByNameWithGenericity("Domicile");
-        logement2.afficher();
+        logement2.afficher();*/
 
-        Logement test = GestionLogements.findLogementByNameWithGenericity("Domicile");
-        test.afficher();*/
+        Optional<Logement> test = GestionLogements.findLogementByNameWithGenericity("AirBnB");
+        if(test.isPresent()) {
+            Logement logement = test.get();
+            logement.afficher();
+        }
 
         Voyageur camille = new Voyageur("Camille", "Gérard", 28);
         listeVoyageurs.add(camille);

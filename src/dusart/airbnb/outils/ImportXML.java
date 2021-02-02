@@ -1,4 +1,4 @@
-package dusart.airbnb.menu;
+package dusart.airbnb.outils;
 
 import dusart.airbnb.logements.Appartement;
 import dusart.airbnb.logements.Logement;

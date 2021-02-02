@@ -2,16 +2,14 @@ package dusart.airbnb.menu;
 
 import dusart.airbnb.logements.Appartement;
 import dusart.airbnb.logements.Logement;
-import dusart.airbnb.logements.LogementsHandler;
 import dusart.airbnb.logements.Maison;
+import dusart.airbnb.outils.Comparateur;
+import dusart.airbnb.outils.ImportXML;
 import dusart.airbnb.reservations.Reservation;
 import dusart.airbnb.utilisateurs.Hote;
 import dusart.airbnb.utilisateurs.Personne;
 import dusart.airbnb.utilisateurs.Voyageur;
-import org.xml.sax.helpers.DefaultHandler;
 
-import javax.xml.parsers.SAXParser;
-import javax.xml.parsers.SAXParserFactory;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -52,22 +50,25 @@ public class Menu {
         listeLogements.add(maison);
         listeLogements.add(appart);
 
-        /*if(GestionLogements.findMaisonByName("Domicile") != null) {
-            GestionLogements.findMaisonByName("Domicile").afficher();
+        Maison maison1 = GestionLogements.findMaisonByName("Domicile");
+        maison1.afficher();
+
+        /*Logement logement1 = GestionLogements.findLogementByName("Domicile");
+        if(logement1 != null) {
+            logement1.afficher();
         }
-        if(GestionLogements.findAppartementByName("AirBnB") != null) {
-            GestionLogements.findAppartementByName("AirBnB").afficher();
-        }
-        if(GestionLogements.findAppartementByName("Domicile") != null) {
-            GestionLogements.findAppartementByName("Domicile").afficher();
-        }
-        if(GestionLogements.findLogementByName("Domicile") != null) {
-            GestionLogements.findLogementByName("Domicile").afficher();
-        }*/
-        GestionLogements.findLogementByNameWithGenericity("Domicile").afficher();
+
+        Maison logement2 = GestionLogements.findLogementByNameWithGenericity("Domicile");
+        logement2.afficher();*/
+
+        Logement test = GestionLogements.findLogementByNameWithGenericity("Domicile");
+        test.afficher();
 
         Voyageur camille = new Voyageur("Camille", "Gérard", 28);
         listeVoyageurs.add(camille);
+
+        /*Comparateur comp = new Comparateur(maison, appart);
+        comp.getHigher();*/
 
         System.out.println("Bienvenue chez AirBnB");
         scanner = new Scanner(System.in);

@@ -16,6 +16,10 @@ public class Hote extends Personne {
         delaiDeReponse = paramDelaiDeReponse;
     }
 
+    public int getDelaiDeReponse() {
+        return delaiDeReponse;
+    }
+
     /**
      * Affiche les informations personnelles et le delai de réponse de l'hôte' dans la console
      */

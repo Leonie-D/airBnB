@@ -2,6 +2,7 @@ package dusart.airbnb.menu;
 
 import dusart.airbnb.logements.Appartement;
 import dusart.airbnb.logements.Logement;
+import dusart.airbnb.logements.LogementNull;
 import dusart.airbnb.logements.Maison;
 
 import java.util.InputMismatchException;
@@ -146,6 +147,7 @@ public class GestionLogements {
     }
 
     // option 1 : deux méthodes, sans généricité
+    // Pas besoin de caster, mais 2 méthodes
     public static Maison findMaisonByName(String name) {
         for(int i = 0; i < Menu.listeLogements.size(); i++) {
             Logement logement = Menu.listeLogements.get(i);
@@ -167,6 +169,7 @@ public class GestionLogements {
     }
 
     // option 2 : 1 méthode, sans généricité
+    // Une seule méthode mais besoin de caster après stockage
     public static Logement findLogementByName(String name) {
         for(int i = 0; i < Menu.listeLogements.size(); i++) {
             Logement logement = Menu.listeLogements.get(i);
@@ -178,13 +181,14 @@ public class GestionLogements {
     }
 
     // option 3 : 1 méthode avec généricité
+    // Une seule méthode et pas besoin de caster
     public static <T extends Logement> T findLogementByNameWithGenericity(String name) {
         for(int i = 0; i < Menu.listeLogements.size(); i++) {
-            T logement = (T) Menu.listeLogements.get(i);
+            Logement logement = Menu.listeLogements.get(i);
             if(logement.getName().equals(name)) {
-                return logement;
+                return (T) logement;
             }
         }
-        return null;
+        return (T) new LogementNull();
     }
 }

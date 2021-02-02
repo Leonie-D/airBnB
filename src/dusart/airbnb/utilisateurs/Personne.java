@@ -18,6 +18,10 @@ public class Personne {
         age = paramAge;
     }
 
+    public int getAge() {
+        return age;
+    }
+
     /**
      * Affiche les informations personnelles de la personne dans la console
      */

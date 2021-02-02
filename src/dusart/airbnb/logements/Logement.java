@@ -3,6 +3,7 @@ package dusart.airbnb.logements;
 import dusart.airbnb.utilisateurs.Hote;
 
 public abstract class Logement {
+    private String name;
     private final Hote hote;
     private int tarifParNuit;
     private final String adresse;
@@ -24,6 +25,15 @@ public abstract class Logement {
         adresse = paramAdresse;
         superficie = paramSuperficie;
         nbVoyageursMax = paramNbVoyageurs;
+        name = "";
+    }
+
+    public void setName(String pName) {
+        name = pName;
+    }
+
+    public String getName() {
+        return name;
     }
 
     /**

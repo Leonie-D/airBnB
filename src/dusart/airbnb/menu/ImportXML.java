@@ -35,7 +35,6 @@ public class ImportXML {
                     Element hoteElement = (Element) eElement.getElementsByTagName("hote").item(0);
 
                     Hote hote = createHote(hoteElement, listeHotes);
-
                     Appartement appart = new Appartement(hote, Integer.parseInt(eElement.getElementsByTagName("tarifParNuit").item(0).getTextContent()), eElement.getElementsByTagName("adresse").item(0).getTextContent(), Integer.parseInt(eElement.getElementsByTagName("superficie").item(0).getTextContent()), Integer.parseInt(eElement.getElementsByTagName("nbVoyageursMax").item(0).getTextContent()), Integer.parseInt(eElement.getElementsByTagName("numeroEtage").item(0).getTextContent()), Integer.parseInt(eElement.getElementsByTagName("superficieBalcon").item(0).getTextContent()));
                     listeLogements.add(appart);
                 }
@@ -51,7 +50,6 @@ public class ImportXML {
                     Element hoteElement = (Element) eElement.getElementsByTagName("hote").item(0);
 
                     Hote hote = createHote(hoteElement, listeHotes);
-
                     Maison maison = new Maison(hote, Integer.parseInt(eElement.getElementsByTagName("tarifParNuit").item(0).getTextContent()), eElement.getElementsByTagName("adresse").item(0).getTextContent(), Integer.parseInt(eElement.getElementsByTagName("superficie").item(0).getTextContent()), Integer.parseInt(eElement.getElementsByTagName("nbVoyageursMax").item(0).getTextContent()), Integer.parseInt(eElement.getElementsByTagName("superficieJardin").item(0).getTextContent()), eElement.getElementsByTagName("possedePiscine").item(0).getTextContent() == "1");
                     listeLogements.add(maison);
                 }

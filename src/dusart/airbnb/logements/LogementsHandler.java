@@ -11,6 +11,17 @@ public class LogementsHandler extends DefaultHandler {
     private static final String MAISON = "Maison";
     private static final String HOTE = "hote";
     private static final String TARIF_NUIT = "tarifParNuit";
+    private static final String NOM = "nom";
+    private static final String PRENOM = "prenom";
+    private static final String AGE = "age";
+    private static final String DELAI_REPONSE = "delaiReponse";
+    private static final String ADRESSE = "adresse";
+    private static final String SUPERFICIE = "superficie";
+    private static final String SUPERFICIE_JARDIN = "superficieJardin";
+    private static final String SUPERFICIE_BALCON = "superficieBalcon";
+    private static final String NB_MAX_VOYAGEUR = "nbVoyageursMax";
+    private static final String NUM_ETAGE = "numeroEtage";
+    private static final String POSSEDE_PISCINE = "possedePiscine";
 
     private ArrayList<Logement> listeLogements = new ArrayList<Logement>();
     private ArrayList<Hote> listeHotes = new ArrayList<Hote>();
@@ -61,40 +72,40 @@ public class LogementsHandler extends DefaultHandler {
                     listeHotes.add(hote);
                 }
                 break;
-            case "nom":
+            case NOM:
                 nomHote = elementValue;
                 break;
-            case "prenom":
+            case PRENOM:
                 prenomHote = elementValue;
                 break;
-            case "age":
+            case AGE:
                 ageHote = Integer.parseInt(elementValue);
                 break;
-            case "delaiReponse":
+            case DELAI_REPONSE:
                 delaiDeReponseHote = Integer.parseInt(elementValue);
                 break;
-            case "tarifParNuit":
+            case TARIF_NUIT:
                 tarifLogement = Integer.parseInt(elementValue);
                 break;
-            case "adresse":
+            case ADRESSE:
                 adresseLogement = elementValue;
                 break;
-            case "superficie":
+            case SUPERFICIE:
                 superficieLogement = Integer.parseInt(elementValue);
                 break;
-            case "superficieJardin":
+            case SUPERFICIE_JARDIN:
                 superficieJardin = Integer.parseInt(elementValue);
                 break;
-            case "superficieBalcon":
+            case SUPERFICIE_BALCON:
                 superficieBalcon = Integer.parseInt(elementValue);
                 break;
-            case "nbVoyageursMax":
+            case NB_MAX_VOYAGEUR:
                 nbVoyageursMax = Integer.parseInt(elementValue);
                 break;
-            case "numeroEtage":
+            case NUM_ETAGE:
                 numeroEtage = Integer.parseInt(elementValue);
                 break;
-            case "possedePiscine":
+            case POSSEDE_PISCINE:
                 possedePiscine = elementValue.equals("1");
                 break;
         }

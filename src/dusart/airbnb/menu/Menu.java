@@ -6,6 +6,7 @@ import dusart.airbnb.logements.LogementsHandler;
 import dusart.airbnb.logements.Maison;
 import dusart.airbnb.reservations.Reservation;
 import dusart.airbnb.utilisateurs.Hote;
+import dusart.airbnb.utilisateurs.Personne;
 import dusart.airbnb.utilisateurs.Voyageur;
 import org.xml.sax.helpers.DefaultHandler;
 
@@ -24,10 +25,10 @@ public class Menu {
 
     public static void main(String[] args) {
         // initialisation des listes;
-        listeHotes = new ArrayList<Hote>();
-        listeLogements = new ArrayList<Logement>();
-        listeVoyageurs = new ArrayList<Voyageur>();
-        listeReservations = new ArrayList<Reservation>();
+        listeHotes = new ArrayList<>();
+        listeLogements = new ArrayList<>();
+        listeVoyageurs = new ArrayList<>();
+        listeReservations = new ArrayList<>();
 
         /*try {
             SAXParserFactory factory = SAXParserFactory.newInstance();
@@ -43,6 +44,27 @@ public class Menu {
         }*/
 
         ImportXML.importLogements("file:///Users/leonie/Downloads/logements.xml", listeLogements, listeHotes);
+
+        Maison maison = new Maison(listeHotes.get(0), 30, "5 place Coty", 50, 3, 20, true);
+        Appartement appart = new Appartement(listeHotes.get(2), 40, "6 place Coty", 100, 2, 3, 45);
+        maison.setName("Domicile");
+        appart.setName("AirBnB");
+        listeLogements.add(maison);
+        listeLogements.add(appart);
+
+        /*if(GestionLogements.findMaisonByName("Domicile") != null) {
+            GestionLogements.findMaisonByName("Domicile").afficher();
+        }
+        if(GestionLogements.findAppartementByName("AirBnB") != null) {
+            GestionLogements.findAppartementByName("AirBnB").afficher();
+        }
+        if(GestionLogements.findAppartementByName("Domicile") != null) {
+            GestionLogements.findAppartementByName("Domicile").afficher();
+        }
+        if(GestionLogements.findLogementByName("Domicile") != null) {
+            GestionLogements.findLogementByName("Domicile").afficher();
+        }*/
+        GestionLogements.findLogementByNameWithGenericity("Domicile").afficher();
 
         Voyageur camille = new Voyageur("Camille", "Gérard", 28);
         listeVoyageurs.add(camille);
@@ -75,7 +97,7 @@ public class Menu {
                 GestionLogements.listerLogements();
                 break;
             case 3:
-                System.out.println("Liste des voyageurs");
+                GestionVoyageurs.listerVoyageurs();
                 break;
             case 4:
                 GestionReservations.listerReservations();
@@ -121,12 +143,12 @@ public class Menu {
     }
 
     /**
-     * Affiche la liste des hôtes
+     * Affiche les listes des hôtes et voyageurs
      */
-    static void afficherListeHotes() {
-        for (int i = 0; i < listeHotes.size(); i++) {
+    static void afficherListePersonnes(ArrayList<? extends Personne> liste) {
+        for (int i = 0; i < liste.size(); i++) {
             System.out.print((i + 1) + " : ");
-            listeHotes.get(i).afficher();
+            liste.get(i).afficher();
             System.out.println();
         }
     }
@@ -138,17 +160,6 @@ public class Menu {
         for (int i = 0; i < listeLogements.size(); i++) {
             System.out.print((i + 1) + " : ");
             listeLogements.get(i).afficher();
-            System.out.println();
-        }
-    }
-
-    /**
-     * Affiche la liste des voyageurs
-     */
-    static void afficherListeVoyageurs() {
-        for (int i = 0; i < listeVoyageurs.size(); i++) {
-            System.out.print((i + 1) + " : ");
-            listeVoyageurs.get(i).afficher();
             System.out.println();
         }
     }

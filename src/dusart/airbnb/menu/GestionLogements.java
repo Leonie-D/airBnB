@@ -61,7 +61,7 @@ public class GestionLogements {
         int numeroEtage = 0;
 
         System.out.println("A qui appartient le logement ?");
-        Menu.afficherListeHotes();
+        Menu.afficherListePersonnes(Menu.listeHotes);
         int indiceHote = Menu.scanner.nextInt() - 1;
         if(indiceHote < 0 || indiceHote >= Menu.listeHotes.size()) {
             throw new Exception("Aucun hôte à cet indice");
@@ -143,5 +143,48 @@ public class GestionLogements {
         Menu.listeLogements.remove(indiceLogement);
         System.out.println("Le logement a bien été supprimé.");
         Menu.afficherListeLogements();
+    }
+
+    // option 1 : deux méthodes, sans généricité
+    public static Maison findMaisonByName(String name) {
+        for(int i = 0; i < Menu.listeLogements.size(); i++) {
+            Logement logement = Menu.listeLogements.get(i);
+            if(logement instanceof Maison && logement.getName().equals(name)) {
+                return (Maison) logement;
+            }
+        }
+        return null;
+    }
+
+    public static Appartement findAppartementByName(String name) {
+        for(int i = 0; i < Menu.listeLogements.size(); i++) {
+            Logement logement = Menu.listeLogements.get(i);
+            if(logement instanceof Appartement && logement.getName().equals(name)) {
+                return (Appartement) logement;
+            }
+        }
+        return null;
+    }
+
+    // option 2 : 1 méthode, sans généricité
+    public static Logement findLogementByName(String name) {
+        for(int i = 0; i < Menu.listeLogements.size(); i++) {
+            Logement logement = Menu.listeLogements.get(i);
+            if(logement.getName().equals(name)) {
+                return logement;
+            }
+        }
+        return null;
+    }
+
+    // option 3 : 1 méthode avec généricité
+    public static <T extends Logement> T findLogementByNameWithGenericity(String name) {
+        for(int i = 0; i < Menu.listeLogements.size(); i++) {
+            T logement = (T) Menu.listeLogements.get(i);
+            if(logement.getName().equals(name)) {
+                return logement;
+            }
+        }
+        return null;
     }
 }

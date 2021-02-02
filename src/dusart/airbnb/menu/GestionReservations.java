@@ -54,7 +54,7 @@ public class GestionReservations {
 
     private  static void ajouterReservation() throws Exception {
         System.out.println("Veuillez saisir le numéro du voyageur pour lequel vous effectuez la réservation :");
-        Menu.afficherListeVoyageurs();
+        Menu.afficherListePersonnes(Menu.listeVoyageurs);
         int indiceVoyageur = Menu.scanner.nextInt() - 1;
         if(indiceVoyageur < 0 || indiceVoyageur >= Menu.listeVoyageurs.size()) {
             throw new Exception("Aucun voyageur à cet indice");

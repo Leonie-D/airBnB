@@ -31,7 +31,9 @@ public class Hote extends Personne {
 
     @Override
     public boolean equals(Object object) {
+        if (this == object) return true;
+        if (object == null || getClass() != object.getClass()) return false;
         Hote hoteCompare = (Hote) object;
-        return super.equals(object) && delaiDeReponse == hoteCompare.delaiDeReponse;
+        return super.equals(hoteCompare) && delaiDeReponse == hoteCompare.delaiDeReponse;
     }
 }

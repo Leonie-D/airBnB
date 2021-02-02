@@ -11,7 +11,7 @@ public class GestionVoyageurs {
     static void listerVoyageurs() {
         System.out.println("-------------------------------------");
         System.out.println("Liste des voyageurs ");
-        Menu.afficherListeVoyageurs();
+        Menu.afficherListePersonnes(Menu.listeVoyageurs);
         System.out.println("-------------------------------------");
         System.out.println("Saisir une option : ");
         System.out.println("1 : Ajouter un voyageur");
@@ -89,7 +89,7 @@ public class GestionVoyageurs {
      */
     private static void supprimerVoyageur() throws Exception {
         System.out.println("-------------------------------------");
-        Menu.afficherListeVoyageurs();
+        Menu.afficherListePersonnes(Menu.listeVoyageurs);
         System.out.println("Merci d'indiquer le numéro du voyageur à supprimer : ");
         int indiceVoyageur = Menu.scanner.nextInt() - 1;
         if(indiceVoyageur < 0 || indiceVoyageur >= Menu.listeVoyageurs.size()) {
@@ -99,6 +99,6 @@ public class GestionVoyageurs {
         Menu.listeVoyageurs.get(indiceVoyageur).afficher();
         System.out.println(" a bien été supprimé.");
         Menu.listeVoyageurs.remove(indiceVoyageur);
-        Menu.afficherListeVoyageurs();
+        Menu.afficherListePersonnes(Menu.listeVoyageurs);
     }
 }

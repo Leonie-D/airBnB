@@ -4,6 +4,7 @@ import dusart.airbnb.logements.Appartement;
 import dusart.airbnb.logements.Logement;
 import dusart.airbnb.logements.Maison;
 import dusart.airbnb.outils.Comparateur;
+import dusart.airbnb.outils.ComparateurMultiple;
 import dusart.airbnb.outils.ImportXML;
 import dusart.airbnb.reservations.Reservation;
 import dusart.airbnb.utilisateurs.Hote;
@@ -87,6 +88,12 @@ public class Menu {
         Personne resultP2 = compPersonnes2.getHigher();
         resultP2.afficher();
         System.out.println();
+
+        System.out.println("-------------------------------------");
+        afficherListeLogements();
+        System.out.println("-------------------------------------");
+        ComparateurMultiple<Logement> compListeLogements = new ComparateurMultiple<>(listeLogements);
+        compListeLogements.getHigher().afficher();
 
         System.out.println("Bienvenue chez AirBnB");
         scanner = new Scanner(System.in);

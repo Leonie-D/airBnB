@@ -74,6 +74,7 @@ public abstract class Logement implements Comparatif<Logement> {
         System.out.println();
         System.out.println("Le logement est situé " + adresse);
         System.out.println("Superficie : " + superficie + "m2");
+        System.out.println("Tarif : " + tarifParNuit + "€");
     }
 
     public Logement getHigher(Logement logement2) {

@@ -16,10 +16,6 @@ public class Hote extends Personne {
         delaiDeReponse = paramDelaiDeReponse;
     }
 
-    public int getDelaiDeReponse() {
-        return delaiDeReponse;
-    }
-
     /**
      * Affiche les informations personnelles et le delai de réponse de l'hôte' dans la console
      */
@@ -39,5 +35,23 @@ public class Hote extends Personne {
         if (object == null || getClass() != object.getClass()) return false;
         Hote hoteCompare = (Hote) object;
         return super.equals(hoteCompare) && delaiDeReponse == hoteCompare.delaiDeReponse;
+    }
+
+    @Override
+    public Personne getHigher(Personne hote2){
+        if(hote2 instanceof Hote) {
+            return delaiDeReponse > ((Hote) hote2).delaiDeReponse ? this : hote2;
+        } else {
+            return this.getAge() > hote2.getAge() ? this : hote2;
+        }
+    }
+
+    @Override
+    public Personne getLower(Personne hote2){
+        if(hote2 instanceof Hote) {
+            return delaiDeReponse < ((Hote) hote2).delaiDeReponse ? this : hote2;
+        } else {
+            return this.getAge() < hote2.getAge() ? this : hote2;
+        }
     }
 }

@@ -1,8 +1,9 @@
 package dusart.airbnb.logements;
 
+import dusart.airbnb.outils.Comparatif;
 import dusart.airbnb.utilisateurs.Hote;
 
-public abstract class Logement {
+public abstract class Logement implements Comparatif<Logement> {
     private String name;
     private final Hote hote;
     private int tarifParNuit;
@@ -73,5 +74,13 @@ public abstract class Logement {
         System.out.println();
         System.out.println("Le logement est situé " + adresse);
         System.out.println("Superficie : " + superficie + "m2");
+    }
+
+    public Logement getHigher(Logement logement2) {
+        return tarifParNuit > logement2.tarifParNuit ? this : logement2;
+    }
+
+    public Logement getLower(Logement logement2) {
+        return tarifParNuit < logement2.tarifParNuit ? this : logement2;
     }
 }

@@ -1,6 +1,8 @@
 package dusart.airbnb.utilisateurs;
 
-public class Personne {
+import dusart.airbnb.outils.Comparatif;
+
+public class Personne implements Comparatif<Personne> {
     private String prenom;
     private String nom;
     private int age;
@@ -37,5 +39,15 @@ public class Personne {
         return nom.equals(personneComparee.nom) &&
                 prenom.equals(personneComparee.prenom) &&
                 age == personneComparee.age;
+    }
+
+    @Override
+    public Personne getHigher(Personne personne2) {
+        return age > personne2.age ? this : personne2;
+    }
+
+    @Override
+    public Personne getLower(Personne personne2) {
+        return age < personne2.age ? this : personne2;
     }
 }

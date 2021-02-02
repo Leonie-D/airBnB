@@ -50,25 +50,39 @@ public class Menu {
         listeLogements.add(maison);
         listeLogements.add(appart);
 
-        Maison maison1 = GestionLogements.findMaisonByName("Domicile");
-        maison1.afficher();
+        Maison maison1 = new Maison(listeHotes.get(0), 30, "5 place Coty", 50, 3, 20, true);
+        /*maison1.afficher();
 
-        /*Logement logement1 = GestionLogements.findLogementByName("Domicile");
+        Logement logement1 = GestionLogements.findLogementByName("Domicile");
         if(logement1 != null) {
             logement1.afficher();
         }
 
         Maison logement2 = GestionLogements.findLogementByNameWithGenericity("Domicile");
-        logement2.afficher();*/
+        logement2.afficher();
 
         Logement test = GestionLogements.findLogementByNameWithGenericity("Domicile");
-        test.afficher();
+        test.afficher();*/
 
         Voyageur camille = new Voyageur("Camille", "Gérard", 28);
         listeVoyageurs.add(camille);
 
-        /*Comparateur comp = new Comparateur(maison, appart);
-        comp.getHigher();*/
+        Hote leonie = new Hote("Leonie", "Dusart", 25, 7);
+        Hote achille = new Hote("Achille", "Dusart", 28, 3);
+
+        Comparateur<Logement> compLogements = new Comparateur<>(maison, appart);
+        Logement resultL = compLogements.getHigher();
+        resultL.afficher();
+
+        Comparateur<Personne> compPersonnes1 = new Comparateur<>(leonie, camille);
+        Personne resultP = compPersonnes1.getHigher();
+        resultP.afficher();
+        System.out.println();
+
+        Comparateur<Personne> compPersonnes2 = new Comparateur<>(leonie, achille);
+        Personne resultP2 = compPersonnes2.getHigher();
+        resultP2.afficher();
+        System.out.println();
 
         System.out.println("Bienvenue chez AirBnB");
         scanner = new Scanner(System.in);

@@ -1,7 +1,7 @@
 package dusart.airbnb.utilisateurs;
 
 public class Hote extends Personne {
-    private int delaiDeReponse;
+    private final int delaiDeReponse;
 
     /**
      * Unique constructeur pour définir un nouvel hôte à partir de 4 paramètres
@@ -42,7 +42,7 @@ public class Hote extends Personne {
         if(hote2 instanceof Hote) {
             return delaiDeReponse > ((Hote) hote2).delaiDeReponse ? this : hote2;
         } else {
-            return this.getAge() > hote2.getAge() ? this : hote2;
+            return super.getHigher(hote2);
         }
     }
 
@@ -51,7 +51,7 @@ public class Hote extends Personne {
         if(hote2 instanceof Hote) {
             return delaiDeReponse < ((Hote) hote2).delaiDeReponse ? this : hote2;
         } else {
-            return this.getAge() < hote2.getAge() ? this : hote2;
+            return super.getLower(hote2);
         }
     }
 }

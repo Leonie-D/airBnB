@@ -30,6 +30,16 @@ public class SejourLong extends Sejour implements ConditionsTarifairesInterace {
     }
 
     /**
+     * Vérifie que le nombre de nuit est compris entre 1 et 5 (inclus)
+     * @param paramNbNuits     le nombre de nuits dans le logement
+     * @return true si la condition est bien respectée, false sinon
+     */
+    @Override
+    public boolean verificationNombreDeNuits(int paramNbNuits) {
+        return paramNbNuits >= 6 && paramNbNuits <= 31;
+    }
+
+    /**
      * Précise si le séjour bénéficie d'une promotion
      * @return toujours true dans le cas d'un séjour long
      */
@@ -57,4 +67,11 @@ public class SejourLong extends Sejour implements ConditionsTarifairesInterace {
         promotion = tarifAvantPromotion * PROMOTION_EN_POURCENTAGE;
         setTarif(tarifAvantPromotion - promotion);
     }
+
+    /*@Override
+    public Object clone() {
+        SejourLong s = null;
+        s = (SejourLong) super.clone();
+        return s;
+    }*/
 }

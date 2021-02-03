@@ -27,6 +27,16 @@ public class SejourCourt extends Sejour implements ConditionsTarifairesInterace 
     }
 
     /**
+     * Vérifie que le nombre de nuit est compris entre 1 et 5 (inclus)
+     * @param paramNbNuits     le nombre de nuits dans le logement
+     * @return true si la condition est bien respectée, false sinon
+     */
+    @Override
+    public boolean verificationNombreDeNuits(int paramNbNuits) {
+        return paramNbNuits > 0 && paramNbNuits <= 5;
+    }
+
+    /**
      * Précise si le séjour bénéficie d'une promotion
      * @return toujours false dans le cas d'un séjour court
      */
@@ -51,4 +61,12 @@ public class SejourCourt extends Sejour implements ConditionsTarifairesInterace 
     protected void miseAJourDuTarif() {
         setTarif(getNbNuits() * getLogement().getTarifParNuit());
     }
+
+    /*@Override
+    public Object clone() {
+        SejourCourt s = null;
+        s = (SejourCourt) super.clone();
+
+        return s;
+    }*/
 }

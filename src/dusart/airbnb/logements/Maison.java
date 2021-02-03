@@ -4,7 +4,7 @@ import dusart.airbnb.utilisateurs.Hote;
 
 public class Maison extends Logement {
     private final int superficieJardin;
-    private boolean possedePiscine;
+    private final boolean possedePiscine;
 
     /**
      * Unique constructeur pour définir une maison et ses conditions de location à partir de 7 paramètres

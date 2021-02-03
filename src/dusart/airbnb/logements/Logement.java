@@ -6,10 +6,10 @@ import dusart.airbnb.utilisateurs.Hote;
 public abstract class Logement implements Comparatif<Logement> {
     private String name;
     private final Hote hote;
-    private int tarifParNuit;
+    private final int tarifParNuit;
     private final String adresse;
     private final int superficie;
-    private int nbVoyageursMax;
+    private final int nbVoyageursMax;
 
     /**
      * Unique constructeur pour définir un logement et ses conditions de location à partir de 5 paramètres
@@ -26,7 +26,6 @@ public abstract class Logement implements Comparatif<Logement> {
         adresse = paramAdresse;
         superficie = paramSuperficie;
         nbVoyageursMax = paramNbVoyageurs;
-        name = "";
     }
 
     public void setName(String pName) {

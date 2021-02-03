@@ -3,9 +3,9 @@ package dusart.airbnb.utilisateurs;
 import dusart.airbnb.outils.Comparatif;
 
 public class Personne implements Comparatif<Personne> {
-    private String prenom;
-    private String nom;
-    private int age;
+    private final String prenom;
+    private final String nom;
+    private final int age;
 
     /**
      * Unique constructeur pour définir une nouvelle personne à partir de trois paramètres
@@ -18,10 +18,6 @@ public class Personne implements Comparatif<Personne> {
         prenom = paramPrenom;
         nom = paramNom;
         age = paramAge;
-    }
-
-    public int getAge() {
-        return age;
     }
 
     /**

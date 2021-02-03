@@ -6,15 +6,13 @@ import dusart.airbnb.logements.Maison;
 import dusart.airbnb.outils.Comparateur;
 import dusart.airbnb.outils.ComparateurMultiple;
 import dusart.airbnb.outils.ImportXML;
-import dusart.airbnb.reservations.Reservation;
+import dusart.airbnb.outils.MaDate;
+import dusart.airbnb.reservations.*;
 import dusart.airbnb.utilisateurs.Hote;
 import dusart.airbnb.utilisateurs.Personne;
 import dusart.airbnb.utilisateurs.Voyageur;
 
-import java.util.ArrayList;
-import java.util.InputMismatchException;
-import java.util.Optional;
-import java.util.Scanner;
+import java.util.*;
 
 public class Menu {
     static Scanner scanner;
@@ -30,6 +28,11 @@ public class Menu {
         listeVoyageurs = new ArrayList<>();
         listeReservations = new ArrayList<>();
 
+        ImportXML.importLogements("file:///Users/leonie/Downloads/logements.xml", listeLogements, listeHotes);
+
+        Voyageur camille = new Voyageur("Camille", "Gérard", 28);
+        listeVoyageurs.add(camille);
+
         /*try {
             SAXParserFactory factory = SAXParserFactory.newInstance();
             SAXParser saxParser = factory.newSAXParser();
@@ -43,9 +46,7 @@ public class Menu {
             System.out.println(e.getMessage());
         }*/
 
-        ImportXML.importLogements("file:///Users/leonie/Downloads/logements.xml", listeLogements, listeHotes);
-
-        Maison maison = new Maison(listeHotes.get(0), 30, "5 place Coty", 50, 3, 20, true);
+        /*Maison maison = new Maison(listeHotes.get(0), 30, "5 place Coty", 50, 3, 20, true);
         Appartement appart = new Appartement(listeHotes.get(2), 40, "6 place Coty", 100, 2, 3, 45);
         maison.setName("Domicile");
         appart.setName("AirBnB");
@@ -53,7 +54,7 @@ public class Menu {
         listeLogements.add(appart);
 
         Maison maison1 = new Maison(listeHotes.get(0), 30, "5 place Coty", 50, 3, 20, true);
-        /*maison1.afficher();
+        maison1.afficher();
 
         Logement logement1 = GestionLogements.findLogementByName("Domicile");
         if(logement1 != null) {
@@ -61,7 +62,7 @@ public class Menu {
         }
 
         Maison logement2 = GestionLogements.findLogementByNameWithGenericity("Domicile");
-        logement2.afficher();*/
+        logement2.afficher();
 
         Optional<Logement> test = GestionLogements.findLogementByNameWithGenericity("AirBnB");
         if(test.isPresent()) {
@@ -69,8 +70,7 @@ public class Menu {
             logement.afficher();
         }
 
-        Voyageur camille = new Voyageur("Camille", "Gérard", 28);
-        listeVoyageurs.add(camille);
+
 
         Hote leonie = new Hote("Leonie", "Dusart", 25, 7);
         Hote achille = new Hote("Achille", "Dusart", 28, 3);
@@ -93,7 +93,35 @@ public class Menu {
         afficherListeLogements();
         System.out.println("-------------------------------------");
         ComparateurMultiple<Logement> compListeLogements = new ComparateurMultiple<>(listeLogements);
-        compListeLogements.getHigher().afficher();
+        compListeLogements.getHigher().afficher();*/
+
+        MaDate dateArrivee = new MaDate(12, 2, 2021);
+        SejourLong sejour = new SejourLong(dateArrivee, 15, listeLogements.get(0), 4);
+
+        //sejour.setLogement(listeLogements.get(2));
+        //sejour.setDateArrivee(new MaDate(1, 11, 2020));
+        //sejour.setDateArrivee(new MaDate(1, 11, 2021));
+        //sejour.setNbNuits(17);
+        //sejour.setNbNuits(3);
+        //sejour.setNbNuits(35);
+
+        try {
+            Reservation resa = new Reservation(sejour, camille, 123);
+            //resa.afficher();
+            // copie défensive ici pour éviter de modifier réservation
+            SendEmailReservation.sendEmail((Reservation) resa.clone());
+            //resa.afficher();
+            //sejour.afficher();
+            SendEmailReservation.sendEmail(resa.getSejour());
+            //sejour.afficher();
+        } catch(Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        //sejour.afficher();
+        // copie défensive
+        SendEmailReservation.sendEmail((Sejour) sejour.clone());
+        //sejour.afficher();
 
         System.out.println("Bienvenue chez AirBnB");
         scanner = new Scanner(System.in);

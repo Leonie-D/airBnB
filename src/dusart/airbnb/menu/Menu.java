@@ -1,10 +1,7 @@
 package dusart.airbnb.menu;
 
 import dusart.airbnb.logements.*;
-import dusart.airbnb.outils.Comparateur;
-import dusart.airbnb.outils.ComparateurMultiple;
-import dusart.airbnb.outils.ImportXML;
-import dusart.airbnb.outils.MaDate;
+import dusart.airbnb.outils.*;
 import dusart.airbnb.reservations.*;
 import dusart.airbnb.utilisateurs.*;
 
@@ -19,13 +16,13 @@ public class Menu {
 
     public static void main(String[] args) {
         // initialisation des listes;
-        listeHotes = new ArrayList<>();
-        listeLogements = new ArrayList<>();
-        listeVoyageurs = new ArrayList<>();
-        listeReservations = new ArrayList<>();
+        AirBnBData data = AirBnBData.getInstance();
+        listeLogements = (ArrayList<Logement>) data.getListe("Logement");
+        listeHotes = (ArrayList<Hote>) data.getListe("Hote");
+        listeVoyageurs = (ArrayList<Voyageur>) data.getListe("Voyageur");
+        listeReservations = (ArrayList<Reservation>) data.getListe("Reservation");
 
         ImportXML.importLogements("file:///Users/leonie/Downloads/logements.xml", listeLogements, listeHotes);
-
         Voyageur camille = new Voyageur("Camille", "Gérard", 28);
         listeVoyageurs.add(camille);
 
@@ -193,34 +190,12 @@ public class Menu {
     }
 
     /**
-     * Affiche les listes des hôtes et voyageurs
+     * Affiche les listes
      */
-    static void afficherListePersonnes(ArrayList<? extends Personne> liste) { // TODO : extends plusieurs classes ?
+    static void afficherListe(ArrayList<? extends Affichable> liste) {
         for (int i = 0; i < liste.size(); i++) {
             System.out.print((i + 1) + " : ");
             liste.get(i).afficher();
-            System.out.println();
-        }
-    }
-
-    /**
-     * Affiche la liste des logements
-     */
-    static void afficherListeLogements() {
-        for (int i = 0; i < listeLogements.size(); i++) {
-            System.out.print((i + 1) + " : ");
-            listeLogements.get(i).afficher();
-            System.out.println();
-        }
-    }
-
-    /**
-     * Affiche la liste des réservations
-     */
-    static void afficherListeReservations() {
-        for (int i = 0; i < listeReservations.size(); i++) {
-            System.out.print((i + 1) + " : ");
-            listeReservations.get(i).afficher();
             System.out.println();
         }
     }

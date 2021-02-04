@@ -26,8 +26,12 @@ public class AirBnBData {
         return INSTANCE;
     }
 
+    /**
+     * @param c une classe parmi Logement, Hote, Voyageur et Reservation
+     * @return une ArrayListe composée d'éléments de la classe c ou une ArrayListe<Object> vide
+     */
     public ArrayList<?> getListe(Class c) {
-        switch(c.getName()) {
+        switch(c.getSimpleName()) {
             case "Logement" :
                 return listeLogements;
             case "Hote" :

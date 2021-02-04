@@ -22,20 +22,20 @@ public class Main {
         Appartement appart = new Appartement(edouard, 70, "8 avenue Maginot, 37100 TOURS", 90, 2, 3, 50);
 
         MaDate dateWe = new MaDate(23, 2, 2020);
-        SejourCourt weekend = new SejourCourt(dateWe, 2, appart, 2);
-        weekend.afficher();
+        //SejourCourt weekend = new SejourCourt(dateWe, 2, appart, 2);
+        //weekend.afficher();
 
         System.out.println();
 
         MaDate dateVacances = new MaDate(30, 5, 2020);
-        SejourLong vacances = new SejourLong(dateVacances, 14, maison, 2);
-        vacances.afficher();
+        //SejourLong vacances = new SejourLong(dateVacances, 14, maison, 2);
+        //vacances.afficher();
 
         System.out.println();
 
         MaDate dateVacances2 = new MaDate(30, 5, 2020);
-        SejourLong vacances2 = new SejourLong(dateVacances2, 140, maison, 2);
-        vacances2.afficher();
+        //SejourLong vacances2 = new SejourLong(dateVacances2, 140, maison, 2);
+        //vacances2.afficher();
 
         System.out.println();
 

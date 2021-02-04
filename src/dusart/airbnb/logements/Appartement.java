@@ -23,6 +23,10 @@ public class Appartement extends Logement {
         numeroEtage = paramNumeroEtage;
     }
 
+    public boolean getPossedeBalcon() {
+        return superficieBalcon > 0;
+    }
+
     @Override
     public int getSuperficieTotale() {
         return super.getSuperficie() + superficieBalcon;

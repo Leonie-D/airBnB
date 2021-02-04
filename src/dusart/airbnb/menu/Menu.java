@@ -26,6 +26,21 @@ public class Menu {
         Voyageur camille = new Voyageur("Camille", "Gérard", 28);
         listeVoyageurs.add(camille);
 
+        Search.SearchBuilder searchBuilder = new Search.SearchBuilder(2).possedePiscine(0).tarifMinParNuit(60);
+        Search search = searchBuilder.build();
+        ArrayList<Logement> recherche = search.result();
+        for(Logement logement : recherche) {
+            System.out.println("--------------------------");
+            logement.afficher();
+        }
+        System.out.println("///--------------------------///");
+        ArrayList<Logement> recherche2 = search.result2();
+        for(Logement logement : recherche) {
+            System.out.println("--------------------------");
+            logement.afficher();
+        }
+        System.out.println("///--------------------------///");
+
         /*try {
             SAXParserFactory factory = SAXParserFactory.newInstance();
             SAXParser saxParser = factory.newSAXParser();

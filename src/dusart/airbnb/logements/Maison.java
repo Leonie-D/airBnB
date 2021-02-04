@@ -23,6 +23,14 @@ public class Maison extends Logement {
         possedePiscine = paramPossedePiscine;
     }
 
+    public boolean getPossedePiscine() {
+        return possedePiscine;
+    }
+
+    public boolean getPossedeJardin() {
+        return superficieJardin > 0;
+    }
+
     @Override
     public int getSuperficieTotale() {
         return super.getSuperficie() + superficieJardin;

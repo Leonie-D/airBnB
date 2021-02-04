@@ -138,6 +138,9 @@ public abstract class Sejour implements SejourInterface, Cloneable {
      * @throws IllegalArgumentException dans le cas où le logement n'a pas la capicité d'accueil requise
      */
     public void setLogement(Logement paramLogement) throws IllegalArgumentException {
+        if(paramLogement == null) {
+            throw new IllegalArgumentException("Le logement ne doit pas être null");
+        }
         if(nbVoyageurs > 0 && nbVoyageurs <= paramLogement.getNbVoyageursMax()) {
             logement = paramLogement;
         } else {

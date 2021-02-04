@@ -53,7 +53,6 @@ public class Reservation implements Cloneable {
         voyageur.afficher();
         System.out.print(" a fait une réservation chez ");
         sejour.afficher();
-        System.out.println("Statut : " + estValidee);
     }
 
     @Override

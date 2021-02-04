@@ -7,11 +7,11 @@ public class ComparateurMultiple<T extends Comparatif<T>> {
 
     public ComparateurMultiple(ArrayList<T> pObjArray) {
         objArray = pObjArray;
-    }
+    } // TODO : copie défensive ?
 
     public void add(T obj) {
         objArray.add(obj);
-    }
+    } // TODO : modifie la liste ?
 
     public T getHigher() {
         int resultIndex = 0;

@@ -1,16 +1,12 @@
 package dusart.airbnb.menu;
 
-import dusart.airbnb.logements.Appartement;
-import dusart.airbnb.logements.Logement;
-import dusart.airbnb.logements.Maison;
+import dusart.airbnb.logements.*;
 import dusart.airbnb.outils.Comparateur;
 import dusart.airbnb.outils.ComparateurMultiple;
 import dusart.airbnb.outils.ImportXML;
 import dusart.airbnb.outils.MaDate;
 import dusart.airbnb.reservations.*;
-import dusart.airbnb.utilisateurs.Hote;
-import dusart.airbnb.utilisateurs.Personne;
-import dusart.airbnb.utilisateurs.Voyageur;
+import dusart.airbnb.utilisateurs.*;
 
 import java.util.*;
 
@@ -95,8 +91,8 @@ public class Menu {
         ComparateurMultiple<Logement> compListeLogements = new ComparateurMultiple<>(listeLogements);
         compListeLogements.getHigher().afficher();*/
 
-        MaDate dateArrivee = new MaDate(12, 2, 2021);
-        SejourLong sejour = new SejourLong(dateArrivee, 15, listeLogements.get(0), 4);
+        /*MaDate dateArrivee = new MaDate(12, 2, 2021);
+        SejourLong sejour = new SejourLong(dateArrivee, 15, listeLogements.get(0), 4);*/
 
         //sejour.setLogement(listeLogements.get(2));
         //sejour.setDateArrivee(new MaDate(1, 11, 2020));
@@ -105,7 +101,7 @@ public class Menu {
         //sejour.setNbNuits(3);
         //sejour.setNbNuits(35);
 
-        try {
+        /*try {
             Reservation resa = new Reservation(sejour, camille, 123);
             //resa.afficher();
             // copie défensive ici pour éviter de modifier réservation
@@ -116,11 +112,11 @@ public class Menu {
             //sejour.afficher();
         } catch(Exception e) {
             System.out.println(e.getMessage());
-        }
+        }*/
 
         //sejour.afficher();
         // copie défensive
-        SendEmailReservation.sendEmail((Sejour) sejour.clone());
+        //SendEmailReservation.sendEmail((Sejour) sejour.clone());
         //sejour.afficher();
 
         System.out.println("Bienvenue chez AirBnB");
@@ -199,7 +195,7 @@ public class Menu {
     /**
      * Affiche les listes des hôtes et voyageurs
      */
-    static void afficherListePersonnes(ArrayList<? extends Personne> liste) {
+    static void afficherListePersonnes(ArrayList<? extends Personne> liste) { // TODO : extends plusieurs classes ?
         for (int i = 0; i < liste.size(); i++) {
             System.out.print((i + 1) + " : ");
             liste.get(i).afficher();

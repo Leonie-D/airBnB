@@ -1,10 +1,7 @@
 package dusart.airbnb.menu;
 
 import dusart.airbnb.outils.MaDate;
-import dusart.airbnb.reservations.Reservation;
-import dusart.airbnb.reservations.Sejour;
-import dusart.airbnb.reservations.SejourCourt;
-import dusart.airbnb.reservations.SejourLong;
+import dusart.airbnb.reservations.*;
 
 import java.io.PrintWriter;
 import java.util.InputMismatchException;
@@ -88,12 +85,7 @@ public class GestionReservations {
         System.out.println("Combien de voyageurs serez-vous ?");
         int nbVoyageurs = Menu.scanner.nextInt();
 
-        Sejour sejour;
-        if(nbNuits < 6) {
-            sejour = new SejourCourt(dateArrivee, nbNuits, Menu.listeLogements.get(indiceLogement), nbVoyageurs);
-        } else {
-            sejour = new SejourLong(dateArrivee, nbNuits, Menu.listeLogements.get(indiceLogement), nbVoyageurs);
-        }
+        Sejour sejour = SejourFactory.getSejour(dateArrivee, nbNuits, Menu.listeLogements.get(indiceLogement), nbVoyageurs);
 
         try {
             int reference = Menu.listeReservations.size();

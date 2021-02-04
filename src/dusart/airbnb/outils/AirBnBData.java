@@ -20,6 +20,8 @@ public class AirBnBData {
         listeHotes = new ArrayList<>();
         listeVoyageurs = new ArrayList<>();
         listeReservations = new ArrayList<>();
+
+        ImportXML.importLogements("file:///Users/leonie/Downloads/logements.xml", listeLogements, listeHotes);
     }
 
     public static AirBnBData getInstance() {

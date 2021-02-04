@@ -5,6 +5,30 @@ import dusart.airbnb.outils.AirBnBData;
 import java.util.ArrayList;
 
 public class Search {
+    private static final int YES = 0;
+    private static final int NO = 1;
+    private static final int NEITHER = 2;
+
+    // alternative (pas idéale ici) aux constantes ci-dessus
+    // pour exemple (Rq : on peut aussi ajouter des méthodes à chaque option, etc)
+    public enum SearchChoice {
+        YES(0, "YES"),
+        NO(1, "NO"),
+        NEITHER(2, "NEITHER");
+
+        private String name;
+        private int value;
+
+        private SearchChoice(int value, String name) {
+            this.value = value;
+            this.name = name;
+        }
+
+        public int getValue() {
+            return value;
+        }
+    }
+
     // required
     private final int nbVoyageurs;
 
@@ -87,6 +111,44 @@ public class Search {
         return result;
     }
 
+    public ArrayList<Logement> result3() {
+        ArrayList<Logement> result = new ArrayList<>();
+        ArrayList<Logement> full = (ArrayList<Logement>) AirBnBData.getInstance().getListe(Logement.class);
+
+        for(int i = 0; i < full.size(); i++) {
+            Logement logement = full.get(i);
+
+            if(logement.getNbVoyageursMax() < nbVoyageurs) {
+                continue;
+            }
+
+            if(logement.getTarifParNuit() < tarifMinParNuit || logement.getTarifParNuit() > tarifMaxParNuit) {
+                continue;
+            }
+
+            if(possedePiscine == 1 && (logement instanceof Appartement || !((Maison) logement).getPossedePiscine())) {
+                continue;
+            } else if(possedePiscine == 0 && logement instanceof Maison && ((Maison) logement).getPossedePiscine()) {
+                continue;
+            }
+
+            if(possedeJardin == 1 && (logement instanceof Appartement || !((Maison) logement).getPossedeJardin())) {
+                continue;
+            } else if(possedeJardin == 0 && logement instanceof Maison && ((Maison) logement).getPossedeJardin()) {
+                continue;
+            }
+
+            if(possedeBalcon == 1 && (logement instanceof Maison || !((Appartement) logement).getPossedeBalcon())) {
+                continue;
+            } else if(possedeBalcon == 0 && logement instanceof Appartement && ((Appartement) logement).getPossedeBalcon()) {
+                continue;
+            }
+
+            result.add(logement);
+        }
+        return result;
+    }
+
     public void afficher() {
         System.out.println("nbVoyageurs : " + nbVoyageurs);
         System.out.println("tarifMinParNuit : " + tarifMinParNuit);
@@ -102,68 +164,67 @@ public class Search {
         private final int nbVoyageurs;
 
         // optional
-        private int tarifMinParNuit = 0; // initialisation au tarif min autorisé pour une nuit
-        private int tarifMaxParNuit = 1000; // initialisation au tarif max autorisé pour une nuit
-        private int possedePiscine = 3; // initialisation à "indifférent"
-        private int possedeJardin = 3; // initialisation à "indifférent"
-        private int possedeBalcon = 3; // initialisation à "indifférent"
+        private int tarifMinParNuit;
+        private int tarifMaxParNuit;
+        private int possedePiscine;
+        private int possedeJardin;
+        private int possedeBalcon;
 
         public SearchBuilder(int pNbVoyageurs) {
             nbVoyageurs = pNbVoyageurs;
+            tarifMinParNuit = 0; // initialisation au tarif min autorisé pour une nuit
+            tarifMaxParNuit = Integer.MAX_VALUE; // initialisation au max possible
+            possedePiscine = NEITHER; // initialisation à "indifférent"
+            possedeJardin = NEITHER; // initialisation à "indifférent"
+            possedeBalcon = NEITHER; // initialisation à "indifférent"
         }
 
         /**
-         * @param pTarifMinParNuit entre 0 et 1000 / par défaut 0
+         * @param pTarifMinParNuit
          * @return lui-même
          */
         public SearchBuilder tarifMinParNuit(int pTarifMinParNuit) {
-            if(pTarifMinParNuit >= 0 && pTarifMinParNuit <= 1000) {
+            if(pTarifMinParNuit >= 0) {
                 tarifMinParNuit = pTarifMinParNuit;
             }
             return this;
         }
 
         /**
-         * @param pTarifMaxParNuit entre 0 et 1000 / par défaut 1000
+         * @param pTarifMaxParNuit
          * @return lui-même
          */
         public SearchBuilder tarifMaxParNuit(int pTarifMaxParNuit) {
-            if(pTarifMaxParNuit >= 0 && pTarifMaxParNuit <= 1000) {
+            if(pTarifMaxParNuit >= 0) {
                 tarifMaxParNuit = pTarifMaxParNuit;
             }
             return this;
         }
 
         /**
-         * @param pPossedePiscine 0 pour non, 1 pour oui / par défaut 3
+         * @param pPossedePiscine
          * @return lui-même
          */
-        public SearchBuilder possedePiscine(int pPossedePiscine) {
-            if(pPossedePiscine >= 0 && pPossedePiscine <= 1) {
-                possedePiscine = pPossedePiscine;
-            }
+        public SearchBuilder possedePiscine(boolean pPossedePiscine) {
+            possedePiscine = pPossedePiscine ? YES : NO;
             return this;
         }
 
         /**
-         * @param pPossedeJardin 0 pour non et 1 pour oui / par défaut 3
+         * @param pPossedeJardin
          * @return lui-même
          */
-        public SearchBuilder possedeJardin(int pPossedeJardin) {
-            if(pPossedeJardin >= 0 && pPossedeJardin <= 1) {
-                possedeJardin = pPossedeJardin;
-            }
+        public SearchBuilder possedeJardin(boolean pPossedeJardin) {
+            possedeJardin = pPossedeJardin ? YES : NO;
             return this;
         }
 
         /**
-         * @param pPossedeBalcon 0 pour non et 1 pour oui / par défaut 3
+         * @param pPossedeBalcon
          * @return lui-même
          */
-        public SearchBuilder possedeBalcon(int pPossedeBalcon) {
-            if(pPossedeBalcon >= 0 && pPossedeBalcon <= 1) {
-                possedeBalcon = pPossedeBalcon;
-            }
+        public SearchBuilder possedeBalcon(boolean pPossedeBalcon) {
+            possedeBalcon = pPossedeBalcon ? YES : NO;
             return this;
         }
 

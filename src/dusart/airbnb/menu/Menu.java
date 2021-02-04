@@ -22,12 +22,14 @@ public class Menu {
         listeVoyageurs = (ArrayList<Voyageur>) data.getListe(Voyageur.class);
         listeReservations = (ArrayList<Reservation>) data.getListe(Reservation.class);
 
-        ImportXML.importLogements("file:///Users/leonie/Downloads/logements.xml", listeLogements, listeHotes);
         Voyageur camille = new Voyageur("Camille", "Gérard", 28);
         listeVoyageurs.add(camille);
 
-        Search.SearchBuilder searchBuilder = new Search.SearchBuilder(2).possedePiscine(0).tarifMinParNuit(60);
-        Search search = searchBuilder.build();
+        Search.SearchBuilder builder = new Search.SearchBuilder(2)
+                .possedePiscine(true)
+                .tarifMinParNuit(60);
+        Search search = builder.build();
+
         ArrayList<Logement> recherche = search.result();
         for(Logement logement : recherche) {
             System.out.println("--------------------------");
@@ -35,7 +37,13 @@ public class Menu {
         }
         System.out.println("///--------------------------///");
         ArrayList<Logement> recherche2 = search.result2();
-        for(Logement logement : recherche) {
+        for(Logement logement : recherche2) {
+            System.out.println("--------------------------");
+            logement.afficher();
+        }
+        System.out.println("///--------------------------///");
+        ArrayList<Logement> recherche3 = search.result3();
+        for(Logement logement : recherche3) {
             System.out.println("--------------------------");
             logement.afficher();
         }

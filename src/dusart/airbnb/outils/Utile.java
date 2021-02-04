@@ -6,6 +6,8 @@ import java.util.Date;
 public class Utile {
     private static final SimpleDateFormat FORMAT = new SimpleDateFormat("dd/MM/yyyy");
 
+    private Utile() {}
+
     /**
      * Crée une instance de Date à partir du jour, du mois et de l'année
      *

@@ -14,7 +14,7 @@ public class GestionLogements {
     static void listerLogements() {
         System.out.println("-------------------------------------");
         System.out.println("Liste des logements ");
-        Menu.afficherListeLogements();
+        Menu.afficherListe(Menu.listeLogements);
         System.out.println("-------------------------------------");
         System.out.println("Saisir une option : ");
         System.out.println("1 : Ajouter un logement");
@@ -62,7 +62,7 @@ public class GestionLogements {
         int numeroEtage = 0;
 
         System.out.println("A qui appartient le logement ?");
-        Menu.afficherListePersonnes(Menu.listeHotes);
+        Menu.afficherListe(Menu.listeHotes);
         int indiceHote = Menu.scanner.nextInt() - 1;
         if(indiceHote < 0 || indiceHote >= Menu.listeHotes.size()) {
             throw new Exception("Aucun hôte à cet indice");
@@ -134,7 +134,7 @@ public class GestionLogements {
 
     private static void supprimerLogement() throws Exception {
         System.out.println("-------------------------------------");
-        Menu.afficherListeLogements();
+        Menu.afficherListe(Menu.listeLogements);
         System.out.println("Merci d'indiquer le numéro du logement à supprimer : ");
         int indiceLogement = Menu.scanner.nextInt() - 1;
         if(indiceLogement < 0 || indiceLogement >= Menu.listeLogements.size()) {
@@ -143,7 +143,7 @@ public class GestionLogements {
 
         Menu.listeLogements.remove(indiceLogement);
         System.out.println("Le logement a bien été supprimé.");
-        Menu.afficherListeLogements();
+        Menu.afficherListe(Menu.listeLogements);
     }
 
     // option 1 : deux méthodes, sans généricité

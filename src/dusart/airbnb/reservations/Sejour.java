@@ -1,10 +1,11 @@
 package dusart.airbnb.reservations;
 
 import dusart.airbnb.logements.Logement;
+import dusart.airbnb.outils.Affichable;
 
 import java.util.Date;
 
-public abstract class Sejour implements SejourInterface, Cloneable {
+public abstract class Sejour implements SejourInterface, Cloneable, Affichable {
     private Date dateArrivee;
     private int nbNuits;
     private Logement logement;

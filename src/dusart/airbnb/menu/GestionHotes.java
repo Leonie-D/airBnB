@@ -11,7 +11,7 @@ public class GestionHotes {
     static void listerHotes() {
         System.out.println("-------------------------------------");
         System.out.println("Liste des hôtes ");
-        Menu.afficherListePersonnes(Menu.listeHotes);
+        Menu.afficherListe(Menu.listeHotes);
         System.out.println("-------------------------------------");
         System.out.println("Saisir une option : ");
         System.out.println("1 : Ajouter un hôte");
@@ -87,7 +87,7 @@ public class GestionHotes {
      */
     private static void supprimerHote() throws Exception {
         System.out.println("-------------------------------------");
-        Menu.afficherListePersonnes(Menu.listeHotes);
+        Menu.afficherListe(Menu.listeHotes);
         System.out.println("Merci d'indiquer le numéro de l'hôte à supprimer : ");
         int indiceHote = Menu.scanner.nextInt() - 1;
         if(indiceHote < 0 || indiceHote >= Menu.listeHotes.size()) {
@@ -97,6 +97,6 @@ public class GestionHotes {
         Menu.listeHotes.get(indiceHote).afficher();
         System.out.println(" a bien été supprimé.");
         Menu.listeHotes.remove(indiceHote);
-        Menu.afficherListePersonnes(Menu.listeHotes);
+        Menu.afficherListe(Menu.listeHotes);
     }
 }

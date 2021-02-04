@@ -1,8 +1,9 @@
 package dusart.airbnb.utilisateurs;
 
+import dusart.airbnb.outils.Affichable;
 import dusart.airbnb.outils.Comparatif;
 
-public class Personne implements Comparatif<Personne> {
+public class Personne implements Comparatif<Personne>, Affichable {
     private final String prenom;
     private final String nom;
     private final int age;

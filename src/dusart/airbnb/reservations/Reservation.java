@@ -1,10 +1,11 @@
 package dusart.airbnb.reservations;
 
+import dusart.airbnb.outils.Affichable;
 import dusart.airbnb.utilisateurs.Voyageur;
 
 import java.util.Date;
 
-public class Reservation implements Cloneable {
+public class Reservation implements Cloneable, Affichable {
     private final int identifiant;
     private final Sejour sejour;
     private final Voyageur voyageur;
@@ -21,7 +22,7 @@ public class Reservation implements Cloneable {
      */
     public Reservation(Sejour paramSejour, Voyageur paramVoyageur, int paramIdentifiant) throws Exception {
         if(paramSejour == null || paramVoyageur == null) {
-            throw new Exception("objects null...");
+            throw new Exception("Un ou plusieurs objects null...");
         } else if(!paramSejour.verficationDateArrivee()) {
             throw new Exception("La date d'arrivée ne peut être antérieure à la date du jour");
         } else if(!paramSejour.verificationNombreDeNuits()) {

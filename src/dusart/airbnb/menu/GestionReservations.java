@@ -13,7 +13,7 @@ public class GestionReservations {
     static void listerReservations() {
         System.out.println("-------------------------------------");
         System.out.println("Liste des réservations ");
-        Menu.afficherListeReservations();
+        Menu.afficherListe(Menu.listeReservations);
         System.out.println("-------------------------------------");
         System.out.println("Saisir une option : ");
         System.out.println("1 : Ajouter une réservation");
@@ -51,14 +51,14 @@ public class GestionReservations {
 
     private  static void ajouterReservation() throws Exception {
         System.out.println("Veuillez saisir le numéro du voyageur pour lequel vous effectuez la réservation :");
-        Menu.afficherListePersonnes(Menu.listeVoyageurs);
+        Menu.afficherListe(Menu.listeVoyageurs);
         int indiceVoyageur = Menu.scanner.nextInt() - 1;
         if(indiceVoyageur < 0 || indiceVoyageur >= Menu.listeVoyageurs.size()) {
             throw new Exception("Aucun voyageur à cet indice");
         }
 
         System.out.println("Veuillez saisir le numéro du logement souhaité :");
-        Menu.afficherListeLogements();
+        Menu.afficherListe(Menu.listeLogements);
         int indiceLogement = Menu.scanner.nextInt() - 1;
         if(indiceLogement < 0 || indiceLogement >= Menu.listeLogements.size()) {
             throw new Exception("Aucun hôte à cet indice");
@@ -112,7 +112,7 @@ public class GestionReservations {
 
     private static void supprimerReservation() throws Exception {
         System.out.println("-------------------------------------");
-        Menu.afficherListeReservations();
+        Menu.afficherListe(Menu.listeReservations);
         System.out.println("Merci d'indiquer le numéro de la réservation à supprimer : ");
         int indiceReservation = Menu.scanner.nextInt() - 1;
         if(indiceReservation < 0 || indiceReservation >= Menu.listeReservations.size()) {
@@ -121,6 +121,6 @@ public class GestionReservations {
 
         Menu.listeReservations.remove(indiceReservation);
         System.out.println("La réservation a bien été supprimée.");
-        Menu.afficherListeReservations();
+        Menu.afficherListe(Menu.listeReservations);
     }
 }

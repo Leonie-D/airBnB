@@ -1,9 +1,10 @@
 package dusart.airbnb.logements;
 
+import dusart.airbnb.outils.Affichable;
 import dusart.airbnb.outils.Comparatif;
 import dusart.airbnb.utilisateurs.Hote;
 
-public abstract class Logement implements Comparatif<Logement> {
+public abstract class Logement implements Comparatif<Logement>, Affichable {
     private String name;
     private final Hote hote;
     private final int tarifParNuit;

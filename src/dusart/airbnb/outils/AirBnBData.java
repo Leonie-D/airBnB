@@ -26,8 +26,8 @@ public class AirBnBData {
         return INSTANCE;
     }
 
-    public ArrayList<?> getListe(String className) {
-        switch(className) {
+    public ArrayList<?> getListe(Class c) {
+        switch(c.getName()) {
             case "Logement" :
                 return listeLogements;
             case "Hote" :

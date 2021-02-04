@@ -17,10 +17,10 @@ public class Menu {
     public static void main(String[] args) {
         // initialisation des listes;
         AirBnBData data = AirBnBData.getInstance();
-        listeLogements = (ArrayList<Logement>) data.getListe("Logement");
-        listeHotes = (ArrayList<Hote>) data.getListe("Hote");
-        listeVoyageurs = (ArrayList<Voyageur>) data.getListe("Voyageur");
-        listeReservations = (ArrayList<Reservation>) data.getListe("Reservation");
+        listeLogements = (ArrayList<Logement>) data.getListe(Logement.class);
+        listeHotes = (ArrayList<Hote>) data.getListe(Hote.class);
+        listeVoyageurs = (ArrayList<Voyageur>) data.getListe(Voyageur.class);
+        listeReservations = (ArrayList<Reservation>) data.getListe(Reservation.class);
 
         ImportXML.importLogements("file:///Users/leonie/Downloads/logements.xml", listeLogements, listeHotes);
         Voyageur camille = new Voyageur("Camille", "Gérard", 28);

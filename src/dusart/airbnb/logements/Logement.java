@@ -4,7 +4,7 @@ import dusart.airbnb.outils.Affichable;
 import dusart.airbnb.outils.Comparatif;
 import dusart.airbnb.utilisateurs.Hote;
 
-public abstract class Logement implements Comparatif<Logement>, Affichable {
+public abstract class Logement implements Comparatif<Logement>, Affichable, Comparable<Logement> {
     private String name;
     private final Hote hote;
     private final int tarifParNuit;
@@ -84,5 +84,10 @@ public abstract class Logement implements Comparatif<Logement>, Affichable {
 
     public Logement getLower(Logement logement2) {
         return tarifParNuit < logement2.tarifParNuit ? this : logement2;
+    }
+
+    @Override
+    public int compareTo(Logement l) {
+        return tarifParNuit - l.tarifParNuit;
     }
 }

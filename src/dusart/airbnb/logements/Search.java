@@ -3,10 +3,13 @@ package dusart.airbnb.logements;
 import dusart.airbnb.outils.AirBnBData;
 
 import java.util.ArrayList;
+import java.util.Optional;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 public class Search {
-    private static final int YES = 0;
-    private static final int NO = 1;
+    private static final int NO = 0;
+    private static final int YES = 1;
     private static final int NEITHER = 2;
 
     // alternative (pas idéale ici) aux constantes ci-dessus
@@ -53,69 +56,6 @@ public class Search {
         ArrayList<Logement> full = (ArrayList<Logement>) AirBnBData.getInstance().getListe(Logement.class);
 
         for(int i = 0; i < full.size(); i++) {
-            boolean keep = true;
-            Logement logement = full.get(i);
-
-            if(logement.getNbVoyageursMax() < nbVoyageurs) {
-                keep = false;
-            }
-
-            if(keep && (logement.getTarifParNuit() < tarifMinParNuit || logement.getTarifParNuit() > tarifMaxParNuit)) {
-                keep = false;
-            }
-
-            if(keep && possedePiscine == 1 && (logement instanceof Appartement || !((Maison) logement).getPossedePiscine())) {
-                keep = false;
-            } else if(keep && possedePiscine == 0 && logement instanceof Maison && ((Maison) logement).getPossedePiscine()) {
-                keep = false;
-            }
-
-            if(keep && possedeJardin == 1 && (logement instanceof Appartement || !((Maison) logement).getPossedeJardin())) {
-                keep = false;
-            } else if(keep && possedeJardin == 0 && logement instanceof Maison && ((Maison) logement).getPossedeJardin()) {
-                keep = false;
-            }
-
-            if(keep && possedeBalcon == 1 && (logement instanceof Maison || !((Appartement) logement).getPossedeBalcon())) {
-                keep = false;
-            } else if(keep && possedeBalcon == 0 && logement instanceof Appartement && ((Appartement) logement).getPossedeBalcon()) {
-                keep = false;
-            }
-
-            if(keep) {
-                result.add(logement);
-            }
-        }
-        return result;
-    }
-
-    public ArrayList<Logement> result2() {
-        ArrayList<Logement> result = (ArrayList<Logement>) AirBnBData.getInstance().getListe(Logement.class).clone();
-        result.removeIf(l -> (l.getNbVoyageursMax() < nbVoyageurs));
-        result.removeIf(l -> (l.getTarifParNuit() < tarifMinParNuit || l.getTarifParNuit() > tarifMaxParNuit));
-        if(possedePiscine == 1) {
-            result.removeIf(l -> (l instanceof Appartement || !((Maison) l).getPossedePiscine()));
-        } else if (possedePiscine == 0) {
-            result.removeIf(l -> (l instanceof Maison && ((Maison) l).getPossedePiscine()));
-        }
-        if(possedeJardin == 1) {
-            result.removeIf(l -> (l instanceof Appartement || !((Maison) l).getPossedeJardin()));
-        } else if (possedeJardin == 0) {
-            result.removeIf(l -> (l instanceof Maison && ((Maison) l).getPossedeJardin()));
-        }
-        if(possedeBalcon == 1) {
-            result.removeIf(l -> (l instanceof Maison || !((Appartement) l).getPossedeBalcon()));
-        } else if (possedeBalcon == 0) {
-            result.removeIf(l -> (l instanceof Appartement && ((Appartement) l).getPossedeBalcon()));
-        }
-        return result;
-    }
-
-    public ArrayList<Logement> result3() {
-        ArrayList<Logement> result = new ArrayList<>();
-        ArrayList<Logement> full = (ArrayList<Logement>) AirBnBData.getInstance().getListe(Logement.class);
-
-        for(int i = 0; i < full.size(); i++) {
             Logement logement = full.get(i);
 
             if(logement.getNbVoyageursMax() < nbVoyageurs) {
@@ -149,13 +89,80 @@ public class Search {
         return result;
     }
 
-    public void afficher() {
-        System.out.println("nbVoyageurs : " + nbVoyageurs);
-        System.out.println("tarifMinParNuit : " + tarifMinParNuit);
-        System.out.println("tarifMaxParNuit : " + tarifMaxParNuit);
-        System.out.println("possedePiscine : " + possedePiscine);
-        System.out.println("possedeJardin : " + possedeJardin);
-        System.out.println("possedeBalcon : " + possedeBalcon);
+    public ArrayList<Logement> result2() {
+        ArrayList<Logement> result = (ArrayList<Logement>) AirBnBData.getInstance().getListe(Logement.class).clone();
+        result.removeIf(l -> (l.getNbVoyageursMax() < nbVoyageurs));
+        result.removeIf(l -> (l.getTarifParNuit() < tarifMinParNuit || l.getTarifParNuit() > tarifMaxParNuit));
+        if(possedePiscine == 1) {
+            result.removeIf(l -> (l instanceof Appartement || !((Maison) l).getPossedePiscine()));
+        } else if (possedePiscine == 0) {
+            result.removeIf(l -> (l instanceof Maison && ((Maison) l).getPossedePiscine()));
+        }
+        if(possedeJardin == 1) {
+            result.removeIf(l -> (l instanceof Appartement || !((Maison) l).getPossedeJardin()));
+        } else if (possedeJardin == 0) {
+            result.removeIf(l -> (l instanceof Maison && ((Maison) l).getPossedeJardin()));
+        }
+        if(possedeBalcon == 1) {
+            result.removeIf(l -> (l instanceof Maison || !((Appartement) l).getPossedeBalcon()));
+        } else if (possedeBalcon == 0) {
+            result.removeIf(l -> (l instanceof Appartement && ((Appartement) l).getPossedeBalcon()));
+        }
+        return result;
+    }
+
+    public ArrayList<Logement> result3() {
+        // test avec filter (uniquement sur nbVoyageurs ici)
+        ArrayList<Logement> result = (ArrayList<Logement>) AirBnBData.getInstance().getListe(Logement.class);
+        return (ArrayList<Logement>) result.stream().filter(l -> l.getNbVoyageursMax() >= nbVoyageurs).collect(Collectors.toList());
+    }
+
+    // avec Predicates
+    public ArrayList<Logement> result4() {
+        ArrayList<Logement> result = (ArrayList<Logement>) AirBnBData.getInstance().getListe(Logement.class);
+        return (ArrayList<Logement>) result.stream()
+                .filter(predicateNbVoyageurs()
+                        .and(predicateTarif())
+                        .and(predicateJardin())
+                        .and(predicatePiscine())
+                        .and(predicateBalcon())
+                )
+                .collect(Collectors.toList());
+    }
+
+    public Predicate<Logement> predicateNbVoyageurs() {
+        return logement -> nbVoyageurs <= logement.getNbVoyageursMax();
+    }
+
+    public Predicate<Logement> predicateTarif() {
+        return logement -> logement.getTarifParNuit() >= tarifMinParNuit && logement.getTarifParNuit() <= tarifMaxParNuit;
+    }
+
+    public Predicate<Logement> predicatePiscine() {
+        if(possedePiscine == 0) {
+            return logement -> logement instanceof Appartement || !((Maison) logement).getPossedePiscine();
+        } else if (possedePiscine == 1) {
+            return logement -> logement instanceof Maison && ((Maison) logement).getPossedePiscine();
+        }
+        return logement -> true;
+    }
+
+    public Predicate<Logement> predicateJardin() {
+        if(possedeJardin == 0) {
+            return logement -> logement instanceof Appartement || !((Maison) logement).getPossedeJardin();
+        } else if (possedeJardin == 1) {
+            return logement -> logement instanceof Maison && ((Maison) logement).getPossedeJardin();
+        }
+        return logement -> true;
+    }
+
+    public Predicate<Logement> predicateBalcon() {
+        if(possedeBalcon == 0) {
+            return logement -> logement instanceof Maison || !((Appartement) logement).getPossedeBalcon();
+        } else if (possedeBalcon == 1) {
+            return logement -> logement instanceof Appartement && ((Appartement) logement).getPossedeBalcon();
+        }
+        return logement -> true;
     }
 
     // Builder Class

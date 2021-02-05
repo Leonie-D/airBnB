@@ -15,6 +15,19 @@ public class Menu {
     static ArrayList<Reservation> listeReservations;
 
     public static void main(String[] args) {
+        /*ArrayList<String> participants = new ArrayList<>();
+        participants.add("Louis");
+        participants.add("Jean");
+        participants.add("Julien");
+        participants.add("Margaux");
+        participants.add("Manon");
+        participants.add("Juliette");
+        participants.add("Marc");
+        participants.add("Tom");
+        participants.add("Jean-Philippe");
+
+        participants.stream().sorted((nom1, nom2) -> Integer.compare(nom1.length(), nom2.length())).forEach(System.out::println);*/
+
         // initialisation des listes;
         AirBnBData data = AirBnBData.getInstance();
         listeLogements = (ArrayList<Logement>) data.getListe(Logement.class);
@@ -26,8 +39,9 @@ public class Menu {
         listeVoyageurs.add(camille);
 
         Search.SearchBuilder builder = new Search.SearchBuilder(2)
-                .possedePiscine(true)
-                .tarifMinParNuit(60);
+                .possedePiscine(false)
+                .tarifMaxParNuit(100)
+                .possedeJardin(false);
         Search search = builder.build();
 
         ArrayList<Logement> recherche = search.result();
@@ -42,7 +56,7 @@ public class Menu {
             logement.afficher();
         }
         System.out.println("///--------------------------///");
-        ArrayList<Logement> recherche3 = search.result3();
+        ArrayList<Logement> recherche3 = search.result4();
         for(Logement logement : recherche3) {
             System.out.println("--------------------------");
             logement.afficher();

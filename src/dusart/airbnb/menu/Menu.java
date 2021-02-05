@@ -44,17 +44,6 @@ public class Menu {
                 .possedeJardin(false);
         Search search = builder.build();
 
-        ArrayList<Logement> recherche = search.result();
-        for(Logement logement : recherche) {
-            System.out.println("--------------------------");
-            logement.afficher();
-        }
-        System.out.println("///--------------------------///");
-        ArrayList<Logement> recherche2 = search.result2();
-        for(Logement logement : recherche2) {
-            System.out.println("--------------------------");
-            logement.afficher();
-        }
         System.out.println("///--------------------------///");
         ArrayList<Logement> recherche3 = search.result4();
         for(Logement logement : recherche3) {
@@ -63,6 +52,7 @@ public class Menu {
         }
         System.out.println("///--------------------------///");
 
+        recherche3.stream().sorted((l1, l2) -> Integer.reverse((Integer) Integer.compare(l1.getTarifParNuit(), l2.getTarifParNuit()))).forEach(Logement::afficher);
         /*try {
             SAXParserFactory factory = SAXParserFactory.newInstance();
             SAXParser saxParser = factory.newSAXParser();

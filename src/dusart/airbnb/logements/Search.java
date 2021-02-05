@@ -3,9 +3,11 @@ package dusart.airbnb.logements;
 import dusart.airbnb.outils.AirBnBData;
 
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Search {
     private static final int NO = 0;

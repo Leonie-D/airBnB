@@ -6,6 +6,9 @@ import dusart.airbnb.reservations.*;
 import dusart.airbnb.utilisateurs.*;
 
 import java.util.*;
+import java.util.function.Consumer;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Menu {
     static Scanner scanner;
@@ -26,7 +29,17 @@ public class Menu {
         participants.add("Tom");
         participants.add("Jean-Philippe");
 
-        participants.stream().sorted((nom1, nom2) -> Integer.compare(nom1.length(), nom2.length())).forEach(System.out::println);*/
+        participants.stream().sorted((nom1, nom2) -> Integer.compare(nom1.length(), nom2.length())).forEach(System.out::println);
+        System.out.println(participants.stream().anyMatch(nom -> nom.startsWith("L")));
+        System.out.println(participants.stream().allMatch(nom -> nom.length() > 4));
+        participants.stream().map(Menu::reverseSyllables).forEach(System.out::println);
+        participants.sort(Comparator.comparing(String::length));
+        for(String name : participants) {
+            System.out.println(name);
+        }
+        participants.stream().takeWhile(n -> n.length() <= 4).forEachOrdered(System.out::println);
+
+        System.exit(0);*/
 
         // initialisation des listes;
         AirBnBData data = AirBnBData.getInstance();
@@ -53,6 +66,9 @@ public class Menu {
         System.out.println("///--------------------------///");
 
         recherche3.stream().sorted((l1, l2) -> Integer.reverse((Integer) Integer.compare(l1.getTarifParNuit(), l2.getTarifParNuit()))).forEach(Logement::afficher);
+        recherche3.stream().sorted((l1, l2) -> l1.getTarifParNuit() - l2.getTarifParNuit()).forEach(Logement::afficher);
+        recherche3.stream().sorted(Comparator.comparing(Logement::getTarifParNuit).reversed()).forEach(Logement::afficher);
+
         /*try {
             SAXParserFactory factory = SAXParserFactory.newInstance();
             SAXParser saxParser = factory.newSAXParser();
@@ -89,8 +105,6 @@ public class Menu {
             Logement logement = test.get();
             logement.afficher();
         }
-
-
 
         Hote leonie = new Hote("Leonie", "Dusart", 25, 7);
         Hote achille = new Hote("Achille", "Dusart", 28, 3);
@@ -225,5 +239,17 @@ public class Menu {
             liste.get(i).afficher();
             System.out.println();
         }
+    }
+
+    // pour tester des choses
+    static String reverseSyllables(String nom) {
+        String reversedNom = "";
+        for(int i = 0; i < nom.length()-1; i += 2) {
+            reversedNom += new StringBuilder(nom.substring(i, i+2)).reverse().toString();
+        }
+        if(nom.length() % 2 == 1) {
+            reversedNom += nom.substring(nom.length() - 1);
+        }
+        return reversedNom;
     }
 }
